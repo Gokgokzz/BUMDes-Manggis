@@ -456,8 +456,16 @@ ul {
 
 .about-wrap { 
     display: flex; 
-    align-items: center; 
+    align-items: stretch; 
     gap: 60px; 
+}
+
+.about-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;  
+    gap: 30px;
 }
 
 .about-img-box { 
@@ -735,93 +743,10 @@ ul {
     filter: brightness(1.05); 
 }
 
-.testi-overflow-container {
-    overflow: hidden;
-    width: 100%;
-    padding: 20px 0;
-    position: relative;
-}
-
-.testi-overflow-container::before,
-.testi-overflow-container::after {
-    content: ""; 
-    position: absolute; 
-    top: 0; width: 100px; 
-    height: 100%; 
-    z-index: 2; 
-    pointer-events: none;
-}
-
-.testi-overflow-container::before { 
-    left: 0; 
-    background: linear-gradient(to right, var(--bg-body), transparent); 
-}
-
-.testi-overflow-container::after { 
-    right: 0; 
-    background: linear-gradient(to left, var(--bg-body), transparent); 
-}
-
-.testi-track {
-    display: flex;
-    gap: 30px;
-    width: max-content;
-    animation: 
-    marquee-scroll 28s linear infinite;
-}
-
-.testi-track:hover { 
-    animation-play-state: paused; 
-}
-
-.testi-card {
-    width: 450px;
-    background: var(--white);
-    border: 1px solid var(--border-color);
-    padding: 35px;
-    border-radius: 30px;
-    display: flex;
-    gap: 24px;
-    box-shadow: var(--shadow-natural);
-    flex-shrink: 0;
-}
-
-.testi-card img { 
-    width: 80px; 
-    height: 80px; 
-    border-radius: 50%; 
-    object-fit: cover; 
-    border: 3px solid var(--brand-light); 
-    transition: 0.4s; 
-}
-
-.testi-card:hover img { 
-    transform: scale(1.1) rotate(-5deg); 
-}
-
 .stars { 
     color: #5B8C5A; 
     font-size: 0.9rem; 
     margin-bottom: 12px; 
-}
-
-.testi-card p.quote { 
-    font-style: 
-    italic; 
-    color: var(--text-muted); 
-    margin-bottom: 20px; 
-    font-size: 1rem; 
-}
-
-.testi-card h5 { 
-    font-size: 1.1rem; 
-    color: var(--brand-dark); 
-    font-weight: 600; 
-}
-
-.testi-card p.role { 
-    font-size: 0.85rem; 
-    color: var(--text-muted); 
 }
 
 .cta-banner { 
@@ -929,7 +854,7 @@ ul {
 
 .map-box { 
     width: 100%; 
-    height: 180px; 
+    height: 150px; 
     background: #eee; 
     border-radius: 20px; 
     position: relative; 
@@ -1084,17 +1009,6 @@ ul {
 
     .section-title { 
         font-size: 1.8rem; 
-    }
-
-    .testi-card { 
-        width: 320px; 
-        padding: 20px; 
-        gap: 15px; 
-    }
-
-    .testi-card img { 
-        width: 60px; 
-        height: 60px; 
     }
 }
 
