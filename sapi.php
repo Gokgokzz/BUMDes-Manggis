@@ -118,7 +118,7 @@ if (isset($_GET['hapus'])) {
                 <?php 
                     } 
                 } else {
-                    echo "<p style='text-align:center; width:100%;'>Belum ada data sapi yang ditawarkan.</p>";
+                    echo "<p class='empty-state'>Belum ada data sapi yang ditawarkan.</p>";
                 }
                 ?>
             </div>

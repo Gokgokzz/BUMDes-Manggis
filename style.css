@@ -939,22 +939,27 @@ ul {
 }
 
 .btn-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     background-color: #e63946;
     color: white;
     border: none;
-    padding: 8px 15px;
-    border-radius: 8px;
-    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 500;
     cursor: pointer;
     text-decoration: none;
-    display: inline-block;
-    text-align: center;
     width: 100%;
-    margin-top: 8px;
+    margin-top: 15px;
     transition: 0.3s;
 }
 
 .btn-delete:hover {
+    color: var(--white);
+    transform: translateY(-2px);
     background-color: #b71c1c;
 }
 
@@ -1237,4 +1242,34 @@ ul {
         width: 100%;
         height: auto;
     }
+}
+
+/* ==========================================
+   STYLING SAAT PRODUK KOSONG
+   ========================================== */
+
+/* Memusatkan seluruh area section ke tengah layar jika di dalamnya terdapat class .empty-state */
+.products-bg:has(.empty-state) {
+    display: flex;
+    align-items: center;
+    min-height: 75vh; /* Membuat tinggi minimum section agar elemen bisa turun ke tengah */
+}
+
+/* Memastikan lebar container tetap proporsional saat berada di mode flex */
+.products-bg:has(.empty-state) .container {
+    width: 100%;
+}
+
+/* Mengurangi jarak bawah judul agar lebih rapat dengan teks peringatan */
+.products-bg:has(.empty-state) .section-header {
+    margin-bottom: 20px;
+}
+
+/* Teks peringatan saat kosong */
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-weight: 500;
 }
