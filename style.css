@@ -21,6 +21,8 @@
 html { 
     scroll-behavior: smooth; 
     scroll-padding-top: 90px; 
+    overflow-y: scroll;
+    scrollbar-gutter: auto;
 }
 
 body {
@@ -29,11 +31,241 @@ body {
     color: var(--text-main);
     line-height: 1.7;
     overflow-x: hidden;
-    
-    /* Pengaturan Sticky Footer */
+    width: 100%;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+}
+
+/* ==========================================
+   GAYA & ANIMASI LOADING SCREEN MANGGIS
+   ========================================== */
+
+/* 1. Container Utama Loader */
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FAFCFA; 
+    background-image: 
+        radial-gradient(at 10% 10%, rgba(46, 111, 60, 0.03) 0px, transparent 50%),
+        radial-gradient(at 90% 90%, rgba(91, 140, 90, 0.03) 0px, transparent 50%);
+    z-index: 9999; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1), visibility 0.8s;
+}
+
+.loader-wrapper.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+/* 2. Cluster Manggis (Struktur Visual) */
+.manggis-cluster {
+    position: relative;
+    width: 150px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.manggis-item {
+    background-color: rgb(78, 39, 39); 
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 0 10px 25px rgb(67, 38, 38);
+    transform-origin: center bottom;
+}
+
+.manggis-cap {
+    background-color: #5B8C5A; 
+    border-radius: 50% 50% 20% 20%;
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.manggis-main {
+    width: 70px;
+    height: 65px;
+    z-index: 3;
+    animation: manggisFloatMain 4s ease-in-out infinite;
+}
+.manggis-main .manggis-cap {
+    width: 45px;
+    height: 20px;
+}
+
+.manggis-sub-1 {
+    width: 45px;
+    height: 42px;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    opacity: 0.9;
+    animation: manggisFloatSub1 4s ease-in-out infinite 0.5s; 
+}
+.manggis-sub-1 .manggis-cap {
+    width: 28px;
+    height: 12px;
+}
+
+.manggis-sub-2 {
+    width: 50px;
+    height: 47px;
+    bottom: 5px;
+    right: 5px;
+    z-index: 1;
+    opacity: 0.8;
+    animation: manggisFloatSub2 4s ease-in-out infinite 1s; 
+}
+.manggis-sub-2 .manggis-cap {
+    width: 32px;
+    height: 14px;
+}
+
+/* 3. Daun-daun melayang */
+.leaf-deco {
+    color: #A2E0B8; 
+    position: absolute;
+    font-size: 1.2rem;
+    opacity: 0;
+    filter: blur(1px);
+}
+
+.leaf-1 {
+    top: -20px;
+    right: 10px;
+    animation: leafFloat 6s linear infinite 0.2s;
+}
+
+.leaf-2 {
+    bottom: 20px;
+    left: -20px;
+    transform: rotate(120deg);
+    animation: leafFloat 6s linear infinite 2s;
+}
+
+.leaf-3 {
+    top: 40px;
+    left: 50px;
+    font-size: 0.8rem;
+    animation: leafFloat 6s linear infinite 4s;
+}
+
+/* 4. Bagian Teks */
+.loader-text {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.loader-text .text-main {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.loader-text .text-village {
+    color: var(--brand);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: -2px;
+}
+
+.load-dots {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.load-dots .dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--leaf);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+.load-dots .dot:nth-child(2) { animation-delay: 0.3s; }
+.load-dots .dot:nth-child(3) { animation-delay: 0.6s; }
+
+/* ==========================================
+   KEYFRAMES (Rahasia pergerakan Mulus)
+   ========================================== */
+@keyframes manggisFloatMain {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        box-shadow: 0 10px 25px rgba(30, 70, 41, 0.2);
+    }
+    50% {
+        transform: translateY(-12px) rotate(2deg); 
+        box-shadow: 0 20px 35px rgba(30, 70, 41, 0.15); 
+    }
+}
+
+@keyframes manggisFloatSub1 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-3px, -8px) rotate(-3deg); }
+}
+
+@keyframes manggisFloatSub2 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(4px, -6px) rotate(4deg); }
+}
+
+@keyframes leafFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg) scale(0.8);
+    }
+    10% { opacity: 0.7; }
+    80% { opacity: 0.7; }
+    100% {
+        opacity: 0;
+        transform: translateY(-60px) rotate(180deg) scale(1.1); 
+    }
+}
+
+@keyframes dotPulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+        background-color: var(--brand);
+    }
+}
+
+body.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
 }
 
 a { 
@@ -45,17 +277,21 @@ ul {
     list-style: none; 
 }
 
-::-webkit-scrollbar { 
-    width: 8px; 
+::-webkit-scrollbar {
+    width: 8px;
 }
 
-::-webkit-scrollbar-track { 
-    background: var(--brand-light); 
+::-webkit-scrollbar-track {
+    background: var(--bg-body);
 }
 
-::-webkit-scrollbar-thumb { 
-    background: var(--brand); 
-    border-radius: 20px; 
+::-webkit-scrollbar-thumb {
+    background-color: var(--leaf);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--brand);
 }
 
 /* ==========================================
@@ -177,9 +413,8 @@ ul {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: rgba(46, 111, 60, 0.08);
+    border-bottom: 2px solid var(--brand);
     padding: 6px 16px;
-    border-radius: 30px;
     margin-bottom: 15px;
 }
 
@@ -414,7 +649,11 @@ ul {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(rgba(26, 56, 17, 0.65), rgba(46, 111, 64, 0.5)), url('https://images.unsplash.com/photo-1596422846543-73c683ee3024?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+    background-image: url('contoh-bumdes-beranda.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     padding-top: 90px;
     color: var(--white);
     position: relative;
@@ -453,8 +692,8 @@ ul {
     height: auto;
     max-height: 60vh; 
     object-fit: contain;
-    border-radius: 10%; 
-    border: 5px solid var(--brand);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
 }
 
 .hero-content {
@@ -778,7 +1017,7 @@ ul {
 }
 
 .btn-small:hover { 
-    background: var(--brand);
+    background: var(--brand);   
     color: var(--white); 
     transform: translateY(-3px); 
 }
@@ -845,6 +1084,134 @@ ul {
 .feature-item p { 
     font-size: 0.9rem; 
     color: rgba(255,255,255,0.8); 
+}
+
+.mascot-container {
+    position: absolute;
+    top: -20px;      /* Tarik ke atas agar terlihat "nongol" dari luar section */
+    right: -45px;     /* Atur jarak dari sisi kanan */
+    width: 150px;    /* Sesuaikan ukuran maskot (besarkan/kecilkan sesuai kebutuhan) */
+    height: 150px;   /* Sesuaikan dengan rasio gambar Anda */
+    transform: rotate(-129deg); /* Membuat posisi gambar miring menengok ke bawah */
+    z-index: 10;     /* Memastikan maskot berada di atas elemen lain */
+    cursor: pointer;
+    
+    /* Transisi smooth (sedikit bouncy) saat posisi/rotasi berubah di hover */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+
+/* Animasi ketika kursor diarahkan ke maskot */
+.mascot-container:hover {
+    transform: rotate(-132deg) scale(1.05) translateY(-5px); /* Gambar menjadi agak tegak, sedikit membesar, dan terangkat */
+    animation: mascotPulseDesktop 1.2s ease-in-out infinite;
+
+}
+
+/* Pengaturan untuk kedua gambar di dalam container */
+.mascot-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease-in-out; /* Transisi pergantian gambar yang sangat smooth */
+    filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.15)); /* Memberi bayangan agar lebih natural dan hidup */
+    animation: idleShadowPulse 2.5s ease-in-out infinite;
+}
+
+/* Menampilkan gambar 'coni-diam' secara default */
+.mascot-diam {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Menyembunyikan gambar 'coni-halo' secara default */
+.mascot-halo {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Saat container di hover, sembunyikan gambar 'diam' */
+.mascot-container:hover .mascot-diam {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Saat container di hover, munculkan gambar 'halo' */
+.mascot-container:hover .mascot-halo {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* =========================================
+   PENGATURAN MASKOT CONI KHUSUS MOBILE / HP
+   ========================================= */
+
+/* Untuk Tablet & HP (Layar <= 768px) */
+@media (max-width: 768px) {
+    .mascot-container {
+        width: 85px;                /* Ukuran Coni diperkecil agar pas dengan layar HP */
+        top: -63px;                 /* Posisi diatur agar "nongol" pas di garis atas section */
+        right: -45px;                /* Jarak dari tepi kanan */
+        transform: rotate(-132deg);  /* Kemiringan sedikit dikurangi agar rapi */
+    }
+
+    /* Efek interaksi saat Coni disentuh (tap) di layar HP */
+    .mascot-container:active,
+    .mascot-container:focus,
+    .mascot-container:hover {
+        transform: rotate(-132deg) scale(1.08) translateY(-4px);
+        animation: mascotPulseMobile 1.2s ease-in-out infinite;
+    }
+
+    /* Ganti ekspresi Coni saat disentuh (Tap) */
+    .mascot-container:active .mascot-diam,
+    .mascot-container:focus .mascot-diam {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .mascot-container:active .mascot-halo,
+    .mascot-container:focus .mascot-halo {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* Untuk HP Layar Sangat Kecil (Layar <= 480px) */
+@media (max-width: 480px) {
+    .mascot-container {
+        width: 70px;     /* Ukuran Coni dibuat lebih mungil agar ruang judul tetap lega */
+        top: -63px;
+        right: -45px;
+    }
+}
+
+@keyframes idleShadowPulse {
+    0%, 100% {
+        filter: drop-shadow(0px 10px 15px rgba(0, 149, 255, 0.37));
+    }
+    50% {
+        filter: drop-shadow(0px 15px 30px rgba(0, 238, 255, 0.519)); /* Bayangan menyebar dan sedikit lebih gelap */
+    }
+}
+
+@keyframes mascotPulseDesktop {
+    0%, 100% { 
+        transform: rotate(-132deg) scale(1.05) translateY(-5px); 
+    }
+    50% { 
+        transform: rotate(-132deg) scale(1.12) translateY(-5px); 
+    }
+}
+
+@keyframes mascotPulseMobile {
+    0%, 100% { 
+        transform: rotate(-132deg) scale(1.08) translateY(-4px); 
+    }
+    50% { 
+        transform: rotate(-132deg) scale(1.15) translateY(-4px); 
+    }
 }
 
 .gallery-grid { 
@@ -963,9 +1330,6 @@ ul {
     background-color: #b71c1c;
 }
 
-/* ==========================================
-   CTA & FOOTER
-   ========================================== */
 .cta-banner { 
     background: var(--leaf); 
     padding: 50px 0; 
@@ -1069,6 +1433,11 @@ ul {
     color: var(--leaf); 
     margin-top: 5px; 
     font-size: 1.1rem; 
+}
+
+footer#kontak {
+    position: relative !important; 
+    overflow: visible !important;
 }
 
 .map-box { 
@@ -1234,13 +1603,24 @@ ul {
 
     .brosur-wrapper {
         width: 100%;
-        margin: 40px 0 20px 0;
+        margin: 0;
         padding: 0;
     }
 
     .img-brosur {
         width: 100%;
         height: auto;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 kolom di HP portrait/tablet */
+        gap: 12px; /* Mengurangi jarak antar foto agar lebih efisien */
+    }
+
+    .gallery-grid img {
+        width: 100%;       /* Memenuhi lebar kolom/wadahnya */
+        height: 180px;     /* Menyesuaikan tinggi agar proporsional di HP */
+        object-fit: cover; /* Mencegah gambar terdistorsi/gepeng */
     }
 }
 
