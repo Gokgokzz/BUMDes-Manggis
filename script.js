@@ -144,4 +144,102 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxClose = document.querySelector('.lightbox-close');
+
+    // Logika Klik Foto untuk Membuka Lightbox
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const img = item.querySelector('img');
+            const titleElement = item.querySelector('.gallery-caption h4');
+            const title = titleElement ? titleElement.innerText : '';
+
+            if (img && lightboxModal && lightboxImg) {
+                lightboxImg.src = img.src;
+                if (lightboxCaption) lightboxCaption.innerText = title;
+                lightboxModal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Mengunci scroll latar belakang
+            }
+        });
+    });
+
+    // Fungsi Menutup Lightbox
+    function closeLightbox() {
+        if (lightboxModal) {
+            lightboxModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', closeLightbox);
+    }
+
+    if (lightboxModal) {
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal) {
+                closeLightbox();
+            }
+        });
+    }
+
+    // Menutup Lightbox dengan tombol ESC di keyboard
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightboxModal && lightboxModal.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+
+    // =========================================
+    // FITUR 3D TILT EFFECT PADA KARTU PRODUK (SUDAH DIPERBAIKI)
+    // =========================================
+    const productCards = document.querySelectorAll('.product-card');
+
+    productCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left; 
+            const y = e.clientY - rect.top;  
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = ((y - centerY) / centerY) * -10; 
+            const rotateY = ((x - centerX) / centerX) * 10;
+
+            // PERBAIKAN 1: Tambahkan translateY(-12px) di sini agar sejalan dan tidak bertabrakan dengan CSS .hover-float
+            card.style.transform = `perspective(1000px) translateY(-12px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+            
+            // PERBAIKAN 2: Gunakan transisi 0.1s (bukan 'none') agar tidak ada efek kedut/getar saat kursor bergerak
+            card.style.transition = 'transform 0.1s ease-out'; 
+        });
+
+        card.addEventListener('mouseleave', () => {
+            // PERBAIKAN 3: Kosongkan nilai transform agar kembali mengikuti style CSS bawaannya dengan natural
+            card.style.transform = ''; 
+            card.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; 
+        });
+    });
+
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    
+    // Munculkan tombol saat di-scroll ke bawah lebih dari 400px
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            if (scrollTopBtn) scrollTopBtn.classList.add('show');
+        } else {
+            if (scrollTopBtn) scrollTopBtn.classList.remove('show');
+        }
+    });
+
+    // Perintah kembali ke atas (secara halus) saat tombol diklik
+    if (scrollTopBtn) {
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 });
