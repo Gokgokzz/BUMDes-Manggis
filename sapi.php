@@ -10,35 +10,6 @@ $current_user_token = $_SESSION['user_token'];
 
 // Memanggil koneksi database
 include 'koneksi.php';
-
-// Logika untuk menghapus data (dengan validasi keamanan token)
-if (isset($_GET['hapus'])) {
-    $id = intval($_GET['hapus']);
-    
-    // Pastikan data yang akan dihapus benar-benar milik token user ini
-    $cek_kepemilikan = mysqli_query($koneksi, "SELECT * FROM produk_sapi WHERE id = $id AND user_token = '$current_user_token'");
-    
-    if (mysqli_num_rows($cek_kepemilikan) > 0) {
-        $row_foto = mysqli_fetch_assoc($cek_kepemilikan);
-        $file_foto = "uploads/" . $row_foto['foto'];
-        
-        // Hapus file fisik gambar jika ada
-        if (!empty($row_foto['foto']) && file_exists($file_foto)) {
-            unlink($file_foto); 
-        }
-        
-        // Query hapus data dari database
-        $query_hapus = "DELETE FROM produk_sapi WHERE id = $id AND user_token = '$current_user_token'";
-        if (mysqli_query($koneksi, $query_hapus)) {
-            echo "<script>alert('Data sapi Anda berhasil dihapus!'); window.location.href='sapi.php';</script>";
-        } else {
-            echo "<script>alert('Gagal menghapus data!'); window.location.href='sapi.php';</script>";
-        }
-    } else {
-        // Jika mencoba menghapus data milik orang lain lewat URL/Inspect Element
-        echo "<script>alert('Akses ditolak! Anda tidak berhak menghapus data milik orang lain.'); window.location.href='sapi.php';</script>";
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -90,31 +61,19 @@ if (isset($_GET['hapus'])) {
 
                 if(mysqli_num_rows($result) > 0) {
                     while($row = mysqli_fetch_assoc($result)) {
-                        $wa = $row['no_hp'];
-                        if(substr($wa, 0, 1) == '0') {
-                            $wa = '62' . substr($wa, 1);
-                        }
                 ?>
-                <!-- Kartu Produk Sapi -->
-                <div class="product-card animated-loop">
-                    <div class="product-img-wrap organic-shape">
-                        <img src="uploads/<?php echo $row['foto'] ? $row['foto'] : 'default-sapi.jpg'; ?>" alt="Foto Sapi">
-                    </div>
-                    <h4><i class="fa-solid fa-cow"></i> <?php echo htmlspecialchars($row['jenis_sapi']); ?></h4>
-                    <p><?php echo htmlspecialchars($row['keterangan']); ?></p>
+                <!-- Kartu Produk Sapi (Diubah menjadi Link ke Detail Produk) -->
+                <a href="detail_produk.php?id=<?php echo $row['id']; ?>&kategori=sapi" class="product-card">
                     
-                    <!-- Tombol Hubungi WhatsApp -->
-                    <a href="https://wa.me/<?php echo $wa; ?>" target="_blank" class="btn btn-product" style="background-color: #336e4f; color: white;">
-                        <i class="fa-brands fa-whatsapp"></i> Hubungi Pemilik
-                    </a>
+                    <div class="product-img-wrap organic-shape">
+                        <img src="uploads/<?php echo !empty($row['foto']) ? $row['foto'] : 'default-sapi.jpg'; ?>" alt="Foto Sapi">
+                    </div>
+                    
+                    <div class="product-info">
+                        <h4><i class="fa-solid fa-cow"></i> <?php echo htmlspecialchars($row['jenis_sapi']); ?></h4>
+                    </div>
 
-                    <!-- Tombol Hapus: Hanya muncul jika data ini milik sesi browser yang sedang aktif -->
-                    <?php if (!empty($row['user_token']) && $row['user_token'] === $current_user_token) { ?>
-                        <a href="sapi.php?hapus=<?php echo $row['id']; ?>" class="btn-delete" onclick="return confirm('Apakah Anda yakin ingin menghapus penawaran sapi ini?');">
-                            <i class="fa-solid fa-trash"></i> Hapus Milik Saya
-                        </a>
-                    <?php } ?>
-                </div>
+                </a>
                 <?php 
                     } 
                 } else {
