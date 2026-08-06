@@ -73,41 +73,38 @@ if (isset($_GET['hapus'])) {
             </div>
             
             <div class="products-grid">
-                <?php
-                $query_tampil = "SELECT * FROM produk_tahunan ORDER BY id DESC";
-                $result = mysqli_query($koneksi, $query_tampil);
+    <?php
+    $query_tampil = "SELECT * FROM produk_tahunan ORDER BY id DESC";
+    $result = mysqli_query($koneksi, $query_tampil);
 
-                if(mysqli_num_rows($result) > 0) {
-                    while($row = mysqli_fetch_assoc($result)) {
-                        $wa = $row['no_hp'];
-                        if(substr($wa, 0, 1) == '0') {
-                            $wa = '62' . substr($wa, 1);
-                        }
-                ?>
-                <div class="product-card animated-loop">
-                    <div class="product-img-wrap organic-shape">
-                        <img src="uploads/<?php echo $row['foto'] ? $row['foto'] : 'default-tahunan.jpg'; ?>" alt="Foto Produk">
-                    </div>
-                    <h4><i class="fa-solid fa-seedling"></i> <?php echo htmlspecialchars($row['nama_produk']); ?></h4>
-                    <p><?php echo htmlspecialchars($row['keterangan']); ?></p>
-                    
-                    <a href="https://wa.me/<?php echo $wa; ?>" target="_blank" class="btn btn-product" style="background-color: #336e4f; color: white;">
-                        <i class="fa-brands fa-whatsapp"></i> Hubungi Penjual
-                    </a>
+    if(mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+    ?>
+    
+    <!-- Kartu Produk -->
+    <a href="detail_produk.php?id=<?php echo $row['id']; ?>&kategori=tahunan" class="product-card">
+        
+        <!-- Gambar di bagian atas -->
+        <div class="product-img-wrap wrap-produk">
+            <img src="uploads/<?php echo !empty($row['foto']) ? $row['foto'] : 'default-image.jpg'; ?>" alt="<?php echo htmlspecialchars($row['nama_produk']); ?>">
+        </div>
+        
+        <!-- Info di bagian bawah -->
+        <div class="product-info">
+            <h4><?php echo htmlspecialchars($row['nama_produk']); ?></h4>
+            <!-- Jika suatu saat butuh harga, Anda bisa tambahkan ini: -->
+            <!-- <div class="product-price">Rp 50.000</div> -->
+        </div>
 
-                    <?php if (!empty($row['user_token']) && $row['user_token'] === $current_user_token) { ?>
-                        <a href="tahunan.php?hapus=<?php echo $row['id']; ?>" class="btn-delete" onclick="return confirm('Apakah Anda yakin ingin menghapus penawaran ini?');">
-                            <i class="fa-solid fa-trash"></i> Hapus Milik Saya
-                        </a>
-                    <?php } ?>
-                </div>
-                <?php 
-                    } 
-                } else {
-                    echo "<p class='empty-state'>Belum ada data produk tahunan yang ditawarkan.</p>";
-                }
-                ?>
-            </div>
+    </a>
+    
+    <?php 
+        } 
+    } else {
+        echo "<p class='empty-state'>Belum ada data produk tahunan yang ditawarkan.</p>";
+    }
+    ?>
+</div>
         </div>
     </section>
 

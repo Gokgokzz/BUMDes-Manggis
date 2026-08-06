@@ -1847,3 +1847,180 @@ footer#kontak {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(46, 111, 64, 0.4);
 }
+
+/* ==========================================
+   MODIFIKASI IMG WRAP HALAMAN TAHUNAN
+   ========================================== */
+.product-img-wrap.wrap-produk {
+    width: 100%; /* Memenuhi lebar dalam kartu produk */
+    height: 220px; /* Tinggi gambar diperbesar agar foto produk jelas */
+    margin: 0 auto 20px; 
+    border-radius: 16px; /* Sudut melengkung standar kotak (bukan bulat/organik) */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08); /* Shadow yang lebih halus */
+    /* Menghilangkan efek 3D agar lebih natural untuk katalog */
+    transform: none !important; 
+}
+
+.product-img-wrap.wrap-produk img {
+    width: 100%;
+    height: 100%; /* Gambar akan pas mengikuti kotak 220px */
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Mengubah efek hover khusus untuk halaman tahunan (zoom in yang lebih kalem) */
+.product-card:hover .product-img-wrap.wrap-produk img {
+    transform: scale(1.08); 
+}
+
+/* ==========================================
+   HALAMAN DETAIL PRODUK
+   ========================================== */
+.detail-container {
+    display: flex;
+    gap: 40px;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    max-width: 1000px;
+    margin: 0 auto;
+    border: 1px solid #eaeaea;
+}
+
+/* Kolom Kiri: Gambar */
+.detail-left {
+    flex: 0 0 400px; /* Lebar tetap untuk gambar */
+}
+
+.detail-left img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid #eaeaea;
+}
+
+/* Kolom Kanan: Detail Teks */
+.detail-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+/* Batasan Deskripsi & Scrollbar */
+/* Batasan Deskripsi & Scrollbar */
+.detail-description {
+    display: block;
+    width: 100%;
+    height: 250px; /* BORDER DITETAPKAN (FIX): Ubah angka 250px sesuai dengan tinggi yang Anda inginkan */
+    border: 2px solid #dce7dc;
+    border-radius: 10px;
+    background: #fcfffc;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #444;
+    overflow-y: auto; /* Teks akan bisa di-scroll ke bawah JIKA melewati batas tinggi 250px */
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    text-align: justify;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Styling Khusus Scrollbar Deskripsi (Agar Rapi) */
+.detail-description::-webkit-scrollbar {
+    width: 5px;
+}
+.detail-description::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+.detail-description::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+.detail-description::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+/* Area Action & Tombol (Tergembok di Bawah Deskripsi) */
+.detail-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: auto; /* Memastikan tombol posisi di paling bawah */
+}
+
+/* Tombol WA Dikecilkan */
+.btn-wa-detail {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #55B570;
+    color: white;
+    padding: 8px 18px; /* Ukuran tombol lebih kecil */
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;  /* Ukuran font lebih kecil */
+    text-decoration: none;
+    transition: 0.3s;
+    border: none;
+}
+
+.btn-wa-detail:hover {
+    background-color: #459a5b;
+    transform: translateY(-2px);
+    color: white;
+}
+
+/* Tombol Hapus Warna Merah */
+.btn-delete-small {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #e74c3c; /* Warna teks merah */
+    background: none;
+    border: none;
+    font-size: 0.85rem;
+    text-decoration: none;
+    padding: 5px 0;
+    transition: 0.3s;
+}
+
+.btn-delete-small:hover {
+    color: #c0392b; /* Merah sedikit lebih gelap saat kursor menempel */
+    text-decoration: underline;
+}
+
+/* Responsif Layar HP */
+@media (max-width: 768px) {
+    .detail-container {
+        flex-direction: column;
+        padding: 20px;
+    }
+    
+    .detail-left {
+        flex: none;
+        width: 100%;
+    }
+    
+    .detail-title {
+        font-size: 1.6rem;
+    }
+    
+    .detail-actions {
+        width: 100%;
+        align-items: center;
+    }
+}
