@@ -32,7 +32,7 @@ include 'koneksi.php';
             </a>
             <div class="nav-links" id="nav-links">
                 <a href="index.html#produk" class="nav-item">Beranda</a>
-                <a href="minyak.php" class="nav-item active">Olahan Kelapa</a>
+                <a href="minyak.php" class="nav-item active">Minyak VCO</a>
                 <a href="form_olahan.php" class="nav-item">Form</a>
             </div>
             <button class="menu-toggle" id="menu-toggle">
@@ -46,7 +46,7 @@ include 'koneksi.php';
         <div class="container">
             <div class="section-header">
                 <div class="section-tag">Katalog Olahan Murni</div>
-                <h3 class="section-title">Daftar Minyak Kelapa</h3>
+                <h3 class="section-title">Daftar Minyak VCO</h3>
             </div>
             
             <div class="products-grid">
@@ -72,7 +72,7 @@ include 'koneksi.php';
                 <?php 
                     } 
                 } else {
-                    echo "<p class='empty-state'>Belum ada data minyak kelapa yang ditawarkan.</p>";
+                    echo "<p class='empty-state'>Belum ada data minyak vco yang ditawarkan.</p>";
                 }
                 ?>
             </div>

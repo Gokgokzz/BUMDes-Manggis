@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // (Penting agar web tidak stuck jika ada gambar/iframe peta yang lambat)
     setTimeout(hideLoader, 25000);
 
-
     // =========================================
     // FUNGSI UMUM
     // =========================================
@@ -137,7 +136,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const navItemsMobile = document.querySelectorAll('.nav-links .nav-item');
         navItemsMobile.forEach(item => {
-            item.addEventListener('click', () => {
+            item.addEventListener('click', (e) => {
+                // Cegah menu langsung tertutup jika yang diklik adalah tombol dropdown ICONNET
+                if (item.getAttribute('href') === '#iconnet') {
+                    e.preventDefault(); 
+                    return; 
+                }
+
                 navLinks.classList.remove('active');
                 menuIcon.classList.remove('fa-xmark');
                 menuIcon.classList.add('fa-bars');
@@ -195,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================
-    // FITUR 3D TILT EFFECT PADA KARTU PRODUK (SUDAH DIPERBAIKI)
+    // FITUR 3D TILT EFFECT PADA KARTU PRODUK 
     // =========================================
     const productCards = document.querySelectorAll('.product-card');
 
@@ -211,15 +216,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const rotateX = ((y - centerY) / centerY) * -10; 
             const rotateY = ((x - centerX) / centerX) * 10;
 
-            // PERBAIKAN 1: Tambahkan translateY(-12px) di sini agar sejalan dan tidak bertabrakan dengan CSS .hover-float
             card.style.transform = `perspective(1000px) translateY(-12px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
-            
-            // PERBAIKAN 2: Gunakan transisi 0.1s (bukan 'none') agar tidak ada efek kedut/getar saat kursor bergerak
             card.style.transition = 'transform 0.1s ease-out'; 
         });
 
         card.addEventListener('mouseleave', () => {
-            // PERBAIKAN 3: Kosongkan nilai transform agar kembali mengikuti style CSS bawaannya dengan natural
             card.style.transform = ''; 
             card.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; 
         });
@@ -242,4 +243,83 @@ document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
-});
+
+    // =========================================
+    // DROPDOWN ICONNET & SUBMENU (FIXED)
+    // =========================================
+    const dropdownItem = document.querySelector('.nav-item-dropdown');
+    const submenuToggle = document.querySelector('.dropdown-sub-toggle');
+    const submenuContainer = document.querySelector('.dropdown-submenu-container');
+    
+    if (dropdownItem) {
+        const dropdownLink = dropdownItem.querySelector('a'); // Mengambil teks "ICONNET"
+        
+        if (dropdownLink) {
+            // Event listener saat ICONNET diklik
+            dropdownLink.addEventListener('click', function(e) {
+                e.preventDefault(); 
+                dropdownItem.classList.toggle('tampil'); 
+            });
+        }
+
+        // Fitur tambahan: Menutup menu secara otomatis jika klik sembarang tempat
+        document.addEventListener('click', function(e) {
+            if (!dropdownItem.contains(e.target)) {
+                dropdownItem.classList.remove('tampil');
+                if (submenuContainer) {
+                    submenuContainer.classList.remove('tampil-sub');
+                }
+            }
+        });
+    }
+
+    // Event Klik khusus untuk "Lowongan Pekerjaan"
+    if (submenuToggle && submenuContainer) {
+        submenuToggle.addEventListener('click', function(e) {
+            // Jika dibuka lewat HP (< 768px), tahan navigasi dan jadikan tombol buka/tutup submenu
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                e.stopPropagation(); 
+                submenuContainer.classList.toggle('tampil-sub');
+            }
+            // Jika di desktop, biarkan klik berjalan normal menuju form-lowongan.php
+        });
+    }
+
+    // =========================================
+    // FITUR TOMBOL ICONNET KHUSUS MOBILE
+    // =========================================
+    const iconnetMobileBtn = document.getElementById('iconnetMobileBtn');
+    const iconnetMobileMenu = document.getElementById('iconnetMobileMenu');
+    const mobileSubmenuToggle = document.getElementById('mobileSubmenuToggle');
+    const mobileSubmenu = document.getElementById('mobileSubmenu');
+
+    if (iconnetMobileBtn && iconnetMobileMenu) {
+        // Logika membuka tutup menu utama
+        iconnetMobileBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation(); // Mencegah event klik menjalar ke document
+            iconnetMobileMenu.classList.toggle('tampil');
+        });
+
+        // Menutup menu ICONNET Mobile otomatis jika area sembarang di layar diklik
+        document.addEventListener('click', function(e) {
+            if (!iconnetMobileMenu.contains(e.target) && e.target !== iconnetMobileBtn) {
+                iconnetMobileMenu.classList.remove('tampil');
+                if (mobileSubmenu) {
+                    mobileSubmenu.classList.remove('tampil-sub');
+                }
+            }
+        });
+    }
+
+    // Logika membuka tutup sub-menu "Lowongan Pekerjaan" di Mobile
+    if (mobileSubmenuToggle && mobileSubmenu) {
+        mobileSubmenuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            mobileSubmenu.classList.toggle('tampil-sub');
+        });
+    }
+
+}); // Penutup utama document.addEventListener('DOMContentLoaded', ...)

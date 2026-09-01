@@ -55,7 +55,7 @@ if (isset($_POST['submit'])) {
             </a>
             <div class="nav-links" id="nav-links">
                 <a href="index.html#produk" class="nav-item">Beranda</a>
-                <a href="minyak.php" class="nav-item">Olahan Kelapa</a>
+                <a href="minyak.php" class="nav-item">Minyak VCO</a>
                 <a href="form_olahan.php" class="nav-item active">Form</a>
             </div>
             <button class="menu-toggle" id="menu-toggle">
@@ -69,7 +69,7 @@ if (isset($_POST['submit'])) {
         <div class="container">
             <div class="section-header">
                 <div class="section-tag">Registrasi Minyak</div>
-                <h3 class="section-title">Form Penjualan Minyak Kelapa</h3>
+                <h3 class="section-title">Form Penjualan Minyak VCO</h3>
             </div>
             
             <div class="form-card">
