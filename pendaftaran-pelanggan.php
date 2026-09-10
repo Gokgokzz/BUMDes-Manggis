@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pendaftaran Pelanggan Baru - ICONNET</title>
-  <link rel="icon" href="logo website.png" type="image/png">
+  <link rel="icon" href="logo-iconnet.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -26,7 +26,28 @@
       --hover-light: rgba(30, 200, 200, 0.08);
       --font-premium: 'Plus Jakarta Sans', sans-serif;
     }
+    /* Custom Scrollbar Toska */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
 
+    ::-webkit-scrollbar-track {
+      background: #0A2240;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--tosca);
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--tosca-dark);
+    }
+
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: var(--tosca) #0A2240;
+    }
     * {
       margin: 0;
       padding: 0;
@@ -485,6 +506,53 @@
       color: #FFFFFF; 
     }
 
+    /* ==================== BAGIAN INFORMASI KAKI / FOOTER ==================== */
+    .footer-section {
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 2px solid var(--border-color);
+      text-align: center;
+    }
+
+    .footer-text-main {
+      font-size: 15px;
+      color: var(--navy);
+      font-weight: 500;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .footer-text-main strong {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .footer-text-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .footer-link {
+      color: var(--tosca-dark);
+      font-weight: 700;
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--blue);
+    }
+
+    /* Google Maps Container Styling */
+    .map-container {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+
     /* ==================== RESPONSIVE KHUSUS KARTU ==================== */
     @media (max-width: 960px) {
       .pkg-grid,
@@ -660,6 +728,32 @@
         <b><span style="font-size: 12px; color: var(--navy); display: block; margin-bottom: 5px;">100 Mbps Hebat 3-24 Bulan : <i class="fas fa-mobile"></i> 10 Hp  -  <i class="fas fa-laptop"></i> 6 Laptop</span></b>
       </div>
     </div>
+
+    <!-- BAGIAN INFORMASI KONTAK TERBARU & GOOGLE MAPS -->
+    <div class="footer-section reveal">
+      <p class="footer-text-sub">
+        <a href="https://iconnet.netlify.app/" target="_blank" rel="noopener noreferrer" class="footer-link">klik disini</a>, jika ingin tahu lebih lanjut tentang paketan' ICONNET.
+      </p>
+      <p class="footer-text-main">
+        Hubungi <strong>+62 821-4774-0808</strong> atau langsung kunjungi <strong>BUMDes Manggis</strong> untuk berlangganan wifi ICONNET.
+      </p>
+      
+      <!-- Peta Google Maps Kantor BUMDes Manggis -->
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3946.0566037810436!2d115.51649707470683!3d-8.493877691547615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd20f812bda2193%3A0x8fbaca94cf8e61a8!2sKantor%20BUMDes%20Catur%20Mandala%20Manggis!5e0!3m2!1sid!2sid!4v1785382222868!5m2!1sid!2sid"
+          width="100%" 
+          height="250" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Peta Lokasi Kantor BUMDes Catur Mandala Manggis">
+        </iframe>
+      </div>
+    </div>
+
+  </div>
 
 </body>
 </html>

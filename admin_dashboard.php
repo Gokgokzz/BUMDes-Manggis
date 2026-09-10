@@ -67,10 +67,21 @@ if (isset($_GET['id']) && isset($_GET['type']) && isset($_GET['action'])) {
         } elseif ($action == 'tolak') {
             mysqli_query($koneksi, "DELETE FROM $tabel WHERE id = '$id'");
         }
-        // Redirect kembali ke halaman kategori yang sedang dibuka
         header("Location: admin_dashboard.php?page=" . $tabel);
         exit;
     }
+}
+
+// --- LOGIKA HAPUS LAMARAN ---
+if (isset($_GET['hapus_lamaran'])) {
+    $id_lamaran = (int)$_GET['hapus_lamaran'];
+    $get_file = mysqli_query($koneksi, "SELECT berkas_cv FROM lamaran_kerja WHERE id = '$id_lamaran'");
+    if ($f = mysqli_fetch_assoc($get_file)) {
+        @unlink("./uploads_cv/" . $f['berkas_cv']);
+    }
+    mysqli_query($koneksi, "DELETE FROM lamaran_kerja WHERE id = '$id_lamaran'");
+    header("Location: admin_dashboard.php?page=lamaran_kerja");
+    exit;
 }
 ?>
 
@@ -262,6 +273,8 @@ if (isset($_GET['id']) && isset($_GET['type']) && isset($_GET['action'])) {
         .btn-action { padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 500; border: none; cursor: pointer; text-decoration: none; display: inline-block; margin-right: 5px;}
         .btn-approve { background: #28a745; color: white; }
         .btn-reject { background: #dc3545; color: white; }
+        .btn-wa { background: #25D366; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 5px; font-weight: 500; }
+        .btn-download { background: #0284c7; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 5px; font-weight: 500; }
 
         /* MODAL POPUP */
         .modal-overlay {
@@ -339,6 +352,11 @@ if (isset($_GET['id']) && isset($_GET['type']) && isset($_GET['action'])) {
                         <i class="fa-solid fa-tree"></i> Produk Tahunan
                     </a>
                 </li>
+                <li class="<?php echo ($page == 'lamaran_kerja') ? 'active' : ''; ?>">
+                    <a href="admin_dashboard.php?page=lamaran_kerja">
+                        <i class="fa-solid fa-user-briefcase"></i> Lamaran Kerja
+                    </a>
+                </li>
             </ul>
         </div>
 
@@ -361,6 +379,7 @@ if (isset($_GET['id']) && isset($_GET['type']) && isset($_GET['action'])) {
                 <h2>
                     <?php 
                     if ($page == 'dashboard') echo "Dashboard Admin BUMDes";
+                    elseif ($page == 'lamaran_kerja') echo "Daftar Pelamar Kerja";
                     else echo "Kelola " . ucwords(str_replace('_', ' ', $page));
                     ?>
                 </h2>
@@ -397,13 +416,17 @@ if (isset($_GET['id']) && isset($_GET['type']) && isset($_GET['action'])) {
                     </div>
                 <?php } ?>
 
-                <div class="stat-card" style="border-left-color: #15803d;">
+                <?php 
+                $q_lamaran = mysqli_query($koneksi, "SELECT COUNT(*) as c FROM lamaran_kerja");
+                $d_lamaran = mysqli_fetch_array($q_lamaran);
+                ?>
+                <div class="stat-card" style="border-left-color: #0284c7;">
                     <div class="stat-info">
-                        <h4>Total Semua Produk</h4>
-                        <h2><?php echo $total_semua; ?></h2>
+                        <h4>Total Pelamar Kerja</h4>
+                        <h2><?php echo $d_lamaran['c'] ?? 0; ?></h2>
                     </div>
-                    <div class="stat-icon" style="background: rgba(21, 128, 61, 0.1); color: #15803d;">
-                        <i class="fa-solid fa-boxes-stacked"></i>
+                    <div class="stat-icon" style="background: rgba(2, 132, 199, 0.1); color: #0284c7;">
+                        <i class="fa-solid fa-user-briefcase"></i>
                     </div>
                 </div>
             </div>
@@ -414,11 +437,68 @@ if (isset($_GET['id']) && isset($_GET['type']) && isset($_GET['action'])) {
                     <h3>Pemberitahuan / Panduan Admin</h3>
                 </div>
                 <p style="color: #555; line-height: 1.6; margin: 10px 0;">
-                    Gunakan menu di <b>Sidebar Sebelah Kiri</b> untuk berpindah ke masing-masing kategori produk secara spesifik. Anda dapat menyetujui (<i>Approve</i>) atau menolak produk yang dikirimkan oleh warga/penjual melalui halaman kategori terkait.
+                    Gunakan menu di <b>Sidebar Sebelah Kiri</b> untuk berpindah ke masing-masing kategori produk atau melihat data pelamar lowongan kerja PLN ICON+.
                 </p>
             </div>
- 
-        <!-- CONDITION 2: HALAMAN KATAGORI PRODUK SPESIFIK -->
+
+        <!-- CONDITION 2: HALAMAN TABEL LAMARAN KERJA -->
+        <?php } elseif ($page == 'lamaran_kerja') { ?>
+
+            <div class="table-wrap">
+                <div class="table-header">
+                    <i class="fa-solid fa-user-briefcase" style="color: var(--brand-light);"></i>
+                    <h3>Daftar Berkas Pelamar Lowongan Kerja</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Posisi</th>
+                            <th>Nama Lengkap</th>
+                            <th>WhatsApp</th>
+                            <th>Alamat Domisili</th>
+                            <th>CV / Berkas</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $query = mysqli_query($koneksi, "SELECT * FROM lamaran_kerja ORDER BY id DESC");
+                        if (mysqli_num_rows($query) == 0) {
+                            echo "<tr><td colspan='6' style='text-align: center; color: #888; padding: 25px;'>Belum ada data lamaran masuk.</td></tr>";
+                        }
+                        while($row = mysqli_fetch_array($query)) {
+                            // Format No. WhatsApp untuk tautan direct chat
+                            $wa = preg_replace('/[^0-9]/', '', $row['whatsapp']);
+                            if (substr($wa, 0, 1) == '0') {
+                                $wa = '62' . substr($wa, 1);
+                            }
+                        ?>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--brand-primary);"><?php echo htmlspecialchars($row['posisi']); ?></td>
+                            <td style="font-weight: 500;"><?php echo htmlspecialchars($row['nama_lengkap']); ?></td>
+                            <td>
+                                <a href="https://wa.me/<?php echo $wa; ?>" target="_blank" class="btn-wa">
+                                    <i class="fa-brands fa-whatsapp"></i> <?php echo htmlspecialchars($row['whatsapp']); ?>
+                                </a>
+                            </td>
+                            <td style="color: #555; max-width: 200px;"><?php echo htmlspecialchars($row['alamat']); ?></td>
+                            <td>
+                                <a href="uploads_cv/<?php echo $row['berkas_cv']; ?>" target="_blank" class="btn-download">
+                                    <i class="fa-solid fa-file-arrow-down"></i> Lihat/Unduh
+                                </a>
+                            </td>
+                            <td>
+                                <a href="admin_dashboard.php?hapus_lamaran=<?php echo $row['id']; ?>" class="btn-action btn-reject" onclick="return confirm('Yakin ingin menghapus data lamaran ini?')">
+                                    <i class="fa-solid fa-trash"></i> Hapus
+                                </a>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+
+        <!-- CONDITION 3: HALAMAN KATEGORI PRODUK -->
         <?php } else { 
             $tabel_name = $page;
         ?>
@@ -444,19 +524,13 @@ if (isset($_GET['id']) && isset($_GET['type']) && isset($_GET['action'])) {
                         }
                         while($row = mysqli_fetch_array($query)) {
                         ?>
-                       <tr>
-    <td style="font-weight: 500;">
-        <?php 
-            // Cek semua kemungkinan nama kolom produk/jenis
-            echo $row['nama_produk'] ?? $row['jenis_sapi'] ?? $row['nama_minyak'] ?? $row['jenis_minyak'] ?? $row['nama'] ?? '-'; 
-        ?>
-    </td>
-    <td style="color: #555;">
-        <?php 
-            // Cek semua kemungkinan nama kolom kontak/penjual
-            echo $row['no_hp'] ?? $row['nama_penjual'] ?? $row['penjual'] ?? $row['kontak'] ?? '-'; 
-        ?>
-    </td>
+                        <tr>
+                            <td style="font-weight: 500;">
+                                <?php echo $row['nama_produk'] ?? $row['jenis_sapi'] ?? $row['nama_minyak'] ?? $row['jenis_minyak'] ?? $row['nama'] ?? '-'; ?>
+                            </td>
+                            <td style="color: #555;">
+                                <?php echo $row['no_hp'] ?? $row['nama_penjual'] ?? $row['penjual'] ?? $row['kontak'] ?? '-'; ?>
+                            </td>
                             <td>
                                 <?php if ($row['status_approve'] == 'active') { ?>
                                     <span style="color: #198754; font-weight: 600; background: #d1e7dd; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem;">Active</span>

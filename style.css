@@ -732,42 +732,6 @@ ul {
     animation-play-state: paused;
 }
 
-/* Styling Khusus Warna ICONNET */
-.iconnet-icon {
-    color: #00008f !important; /* Putih bersih agar berdiri sejajar dengan background gelap */
-    font-weight: 800;
-    -webkit-text-stroke: 0.4px #ffffff; /* Hapus stroke gelap yang bikin buram */
-    
-}
-
-.iconnet-net {
-    color: #00F0FF !important; /* Cyan menyala */
-    font-weight: 800;
-    -webkit-text-stroke: 0px;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-}
-
-/* Pastikan ukuran & keterbacaan di marquee seimbang */
-.welcome-marquee .iconnet-icon,
-.welcome-marquee .iconnet-net {
-    font-size: 1.05em;
-    letter-spacing: 0.5px;
-}
-/* Modifikasi Ketajaman Teks ICONNET pada Marquee Track */
-.welcome-marquee .marquee-content .iconnet-icon {
-    color: #002B66; /* Warna navy yang lebih pekat & tajam */
-    font-weight: 800; /* Bolding lebih tebal */
-    letter-spacing: 0.8px;
-    text-shadow: 0 0 1px rgba(255, 255, 255, 0.6); /* Outline tipis halus agar makin kontras */
-}
-
-.welcome-marquee .marquee-content .iconnet-net {
-    color: #00E5D8; /* Warna cyan/turkuis terang & lebih menyala */
-    font-weight: 800;
-    letter-spacing: 0.8px;
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.4); /* Shadow hitam halus agar pop-out di background hijau */
-}
-
 /* ==========================================
    ABOUT & BROSUR
    ========================================== */
@@ -1671,7 +1635,21 @@ footer#kontak { position: relative !important; overflow: visible !important; }
     flex-direction: column;
     animation: slideDownMenu 0.3s ease forwards;
 }
+.dropdown-sub-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.dropdown-sub-toggle i {
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+/* Rotasi panah mengarah ke bawah saat submenu di-hover atau di-klik */
+.dropdown-submenu-container:hover .dropdown-sub-toggle i,
+.dropdown-submenu-container.tampil-sub .dropdown-sub-toggle i {
+    transform: rotate(90deg);
+}
 .dropdown-submenu {
     padding-left: 5px; 
     margin-left: -5px; 
@@ -1836,8 +1814,10 @@ footer#kontak { position: relative !important; overflow: visible !important; }
         padding-left: 25px;
         font-size: 0.85rem;
     }
+    
     /* Navbar Mobile */
     .menu-toggle { display: block; }
+
     .nav-links {
         position: absolute;
         top: 100%;
@@ -1851,21 +1831,25 @@ footer#kontak { position: relative !important; overflow: visible !important; }
         display: none;
         border-top: 1px solid var(--border-color);
     }
+
     .navbar.scrolled .nav-links {
         background: rgba(255, 255, 255, 0.6);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
     }
+
     .nav-links.active {
         display: flex;
         animation: slideDownMenu 0.3s ease forwards;
     }
+
     .nav-item {
         width: 100%;
         text-align: center;
         padding: 15px 0;
         border-bottom: 1px solid rgba(46, 111, 64, 0.04);
     }
+
     .nav-item:last-child { border-bottom: none; }
 
     /* Dropdown Menu Mobile */
@@ -1880,6 +1864,7 @@ footer#kontak { position: relative !important; overflow: visible !important; }
         width: 100%;
         display: none;
     }
+
     .nav-item-dropdown.tampil .dropdown-menu { display: flex; }
     .dropdown-menu a { padding: 12px 15px; font-size: 0.85rem; }
     .dropdown-menu > a:hover, .dropdown-submenu-container:hover > a { padding-left: 15px; }
@@ -1891,6 +1876,7 @@ footer#kontak { position: relative !important; overflow: visible !important; }
         width: 100%;
         display: none;
     }
+
     .dropdown-submenu-container:hover .dropdown-submenu,
     .dropdown-submenu-container:focus-within .dropdown-submenu {
         display: flex;
@@ -1906,6 +1892,7 @@ footer#kontak { position: relative !important; overflow: visible !important; }
         display: flex;
         align-items: center;
     }
+
     .hero-wrapper { flex-direction: column; text-align: center; gap: 30px; }
     .hero-image img { max-height: 35vh; }
     .hero-buttons {
@@ -1917,6 +1904,7 @@ footer#kontak { position: relative !important; overflow: visible !important; }
         width: 100%;
         overflow-x: visible;     
     }
+
     .hero-buttons .btn { padding: 8px 14px; font-size: 0.8rem; gap: 6px; }
     .hero h2 { font-size: 2.8rem; }
 
@@ -1946,16 +1934,33 @@ footer#kontak { position: relative !important; overflow: visible !important; }
         right: -45px;                
         transform: rotate(-132deg);  
     }
+
     .mascot-container:active,
     .mascot-container:focus,
     .mascot-container:hover {
         transform: rotate(-132deg) scale(1.08) translateY(-4px);
         animation: mascotPulseMobile 1.2s ease-in-out infinite;
     }
+
     .mascot-container:active .mascot-diam,
     .mascot-container:focus .mascot-diam { opacity: 0; visibility: hidden; }
     .mascot-container:active .mascot-halo,
     .mascot-container:focus .mascot-halo { opacity: 1; visibility: visible; }
+
+    .mascot-pointer {
+        top: -85px;
+        right: 15px;
+    }
+    
+    .pointer-text {
+        font-size: 0.65rem;
+        padding: 2px 8px;
+    }
+
+    .pointer-arrow {
+        width: 45px;
+        height: 38px;
+    }
 }
 
 /* --- HP SANGAT KECIL (Maksimal 480px) --- */
@@ -2137,3 +2142,78 @@ footer#kontak { position: relative !important; overflow: visible !important; }
     }
 }
 
+.iconnet-icon {
+    color: #00008f !important; /* Putih bersih agar berdiri sejajar dengan background gelap */
+    font-weight: 800;
+    -webkit-text-stroke: 0.4px #ffffff; /* Hapus stroke gelap yang bikin buram */
+    
+}
+
+.iconnet-net {
+    color: #00F0FF !important; /* Cyan menyala */
+    font-weight: 800;
+    -webkit-text-stroke: 0px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Pastikan ukuran & keterbacaan di marquee seimbang */
+.welcome-marquee .iconnet-icon,
+.welcome-marquee .iconnet-net {
+    font-size: 1.05rem;
+}
+/* Modifikasi Ketajaman Teks ICONNET pada Marquee Track */
+.welcome-marquee .marquee-content .iconnet-icon {
+    color: #002B66; /* Warna navy yang lebih pekat & tajam */
+    font-weight: 800; /* Bolding lebih tebal */
+    letter-spacing: 0.8px;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.6); /* Outline tipis halus agar makin kontras */
+}
+
+.welcome-marquee .marquee-content .iconnet-net {
+    color: #00E5D8; /* Warna cyan/turkuis terang & lebih menyala */
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.4); /* Shadow hitam halus agar pop-out di background hijau */
+}
+
+.mascot-pointer {
+    position: absolute;
+    top: -75px;
+    right: 80px;
+    z-index: 12;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none; /* Supaya klik tidak terhalang */
+    animation: pointerBounce 2s ease-in-out infinite;
+}
+
+.pointer-text {
+    background-color: #00b3c0;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.pointer-arrow {
+    width: 60px;
+    height: 50px;
+    margin-top: 2px;
+    transform: rotate(-10deg);
+}
+
+/* Animasi membal (bounce) untuk menarik perhatian */
+@keyframes pointerBounce {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+    }
+    50% {
+        transform: translateY(-8px) scale(1.05);
+    }
+}
