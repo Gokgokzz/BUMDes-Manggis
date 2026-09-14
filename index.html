@@ -103,7 +103,53 @@
                 <div class="hero-wrapper">
                     
                     <div class="hero-image">
-                        <img src="foto-kepala-bumdes.png" alt="Foto BUMDes Manggis" width="600" height="600" fetchpriority="high">
+                        <!-- Tombol Navigasi Manual Kiri -->
+                        <button class="hero-arrow hero-prev" id="heroPrev" aria-label="Foto Sebelumnya">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                    
+                        <!-- Track & Wrapper Slideshow Foto -->
+                        <div class="hero-slider-track" id="heroSliderTrack">
+
+                            <!-- Foto 1 (Ketua) -->
+                            <div class="hero-slide active">
+                                <div class="hero-img-card">
+                                    <img src="I GEDE SAPUTRA WISNAWA (KETUA).png" alt="I GEDE SAPUTRA WISNAWA" width="600" height="600" fetchpriority="high">
+                                    <div class="hero-name-badge">
+                                        <span class="name">I GEDE SAPUTRA WISNAWA</span>
+                                        <span class="role">KETUA</span>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <!-- Foto 2 (Bendahara) -->
+                            <div class="hero-slide">
+                                <div class="hero-img-card">
+                                    <img src="NI KOMANG AYU SUARI DEWI (BENDAHARA).png" alt="NI KOMANG AYU SUARI DEWI" width="600" height="600">
+                                    <div class="hero-name-badge">
+                                        <span class="name">NI KOMANG AYU SUARI DEWI</span>
+                                        <span class="role">BENDAHARA</span>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <!-- Foto 3 (Penasehat/Pengawas) -->
+                            <div class="hero-slide">
+                                <div class="hero-img-card">
+                                    <img src="I WAYAN SEMADI (PENASEHATPENGAWAS).png" alt="I WAYAN SEMADI" width="600" height="600">
+                                    <div class="hero-name-badge">
+                                        <span class="name">I WAYAN SEMADI</span>
+                                        <span class="role">PENASEHAT/PENGAWAS</span>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    
+                        <!-- Tombol Navigasi Manual Kanan -->
+                        <button class="hero-arrow hero-next" id="heroNext" aria-label="Foto Selanjutnya">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
                     </div>
                     
                     <div class="hero-content">
@@ -147,7 +193,7 @@
                     
                     <div class="about-left">
                         <div class="about-img-box hover-float">
-                            <img src="contoh-bumdes.jpg" alt="Gedung BUMDes Manggis" width="600" height="400" loading="lazy" decoding="async">
+                            <img src="Struktur Organisasi.jpeg" alt="Gedung BUMDes Manggis" width="600" height="400" loading="lazy" decoding="async">
                         </div>
                         
                         <div class="vm-grid">
@@ -245,80 +291,258 @@
                     <h3 class="section-title">Dokumentasi & Galeri Kerja</h3>
                 </div>
 
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="dokum1.jpeg" alt="Dokumentasi Kerja BUMDes 1" width="400" height="300" loading="lazy" decoding="async">
-                        <div class="gallery-overlay">
-                            <div class="gallery-caption">
-                                <h4>Musdes 2024 (1)</h4>
-                                <i class="fa-solid fa-expand"></i>
+                <!-- CAROUSEL WRAPPER -->
+                <div class="gallery-carousel-wrapper">
+                    <!-- Tombol Panah Kiri -->
+                    <button class="gallery-arrow gallery-prev" id="galleryPrev" aria-label="Halaman Sebelumnya">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <!-- Track / Container Slider -->
+                    <div class="gallery-slider-track" id="gallerySliderTrack">
+                        
+                        <!-- HALAMAN 1 (8 FOTO: 4 KESAMPING x 2 KEBAWAH) -->
+                        <div class="gallery-page">
+                            <div class="gallery-grid">
+                                <div class="gallery-item">
+                                    <img src="dokum1.jpeg" alt="Dokumentasi Kerja BUMDes 1" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Musdes 2024 (1)</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum2.jpeg" alt="Dokumentasi Kerja BUMDes 2" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Musdes 2024 (2)</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum3.jpeg" alt="Dokumentasi Kerja BUMDes 3" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Program Ketahanan Pangan (1)</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum4.jpeg" alt="Dokumentasi Kerja BUMDes 4" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Program Ketahanan Pangan (2)</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum5.jpeg" alt="Dokumentasi Kerja BUMDes 5" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Musdes 2025</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum6.jpeg" alt="Dokumentasi Kerja BUMDes 6" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Pengurus BUMDes Manggis Saat Ini</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum7.jpeg" alt="Dokumentasi Kerja BUMDes 7" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Air Terjun Grojogan Yehpoh</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum8.jpeg" alt="Dokumentasi Kerja BUMDes 8" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Program Ketahanan Pangan (3)</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="dokum2.jpeg" alt="Dokumentasi Kerja BUMDes 2" width="400" height="300" loading="lazy" decoding="async">
-                        <div class="gallery-overlay">
-                            <div class="gallery-caption">
-                                <h4>Musdes 2024 (2)</h4>
-                                <i class="fa-solid fa-expand"></i>
+
+                        <div class="gallery-page">
+                            <div class="gallery-grid">
+                                <div class="gallery-item">
+                                    <img src="dokum1.jpeg" alt="Dokumentasi Kerja BUMDes 1" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Musdes 2024 (1)</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum2.jpeg" alt="Dokumentasi Kerja BUMDes 2" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Musdes 2024 (2)</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum3.jpeg" alt="Dokumentasi Kerja BUMDes 3" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Program Ketahanan Pangan (1)</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum4.jpeg" alt="Dokumentasi Kerja BUMDes 4" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Program Ketahanan Pangan (2)</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum5.jpeg" alt="Dokumentasi Kerja BUMDes 5" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Musdes 2025</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum6.jpeg" alt="Dokumentasi Kerja BUMDes 6" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Pengurus BUMDes Manggis Saat Ini</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum7.jpeg" alt="Dokumentasi Kerja BUMDes 7" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Air Terjun Grojogan Yehpoh</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum8.jpeg" alt="Dokumentasi Kerja BUMDes 8" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Program Ketahanan Pangan (3)</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="dokum3.jpeg" alt="Dokumentasi Kerja BUMDes 3" width="400" height="300" loading="lazy" decoding="async">
-                        <div class="gallery-overlay">
-                            <div class="gallery-caption">
-                                <h4>Program Ketahanan Pangan (1)</h4>
-                                <i class="fa-solid fa-expand"></i>
+
+                        <div class="gallery-page">
+                            <div class="gallery-grid">
+                                <div class="gallery-item">
+                                    <img src="dokum1.jpeg" alt="Dokumentasi Kerja BUMDes 1" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Musdes 2024 (1)</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum2.jpeg" alt="Dokumentasi Kerja BUMDes 2" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Musdes 2024 (2)</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum3.jpeg" alt="Dokumentasi Kerja BUMDes 3" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Program Ketahanan Pangan (1)</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum4.jpeg" alt="Dokumentasi Kerja BUMDes 4" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Program Ketahanan Pangan (2)</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum5.jpeg" alt="Dokumentasi Kerja BUMDes 5" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Musdes 2025</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum6.jpeg" alt="Dokumentasi Kerja BUMDes 6" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Pengurus BUMDes Manggis Saat Ini</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum7.jpeg" alt="Dokumentasi Kerja BUMDes 7" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Air Terjun Grojogan Yehpoh</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gallery-item">
+                                    <img src="dokum8.jpeg" alt="Dokumentasi Kerja BUMDes 8" width="400" height="300" loading="lazy" decoding="async">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h4>Program Ketahanan Pangan (3)</h4>
+                                            <i class="fa-solid fa-expand"></i>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-                    <div class="gallery-item">
-                        <img src="dokum4.jpeg" alt="Dokumentasi Kerja BUMDes 4" width="400" height="300" loading="lazy" decoding="async">
-                        <div class="gallery-overlay">
-                            <div class="gallery-caption">
-                                <h4>Program Ketahanan Pangan (2)</h4>
-                                <i class="fa-solid fa-expand"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="dokum5.jpeg" alt="Dokumentasi Kerja BUMDes 5" width="400" height="300" loading="lazy" decoding="async">
-                        <div class="gallery-overlay">
-                            <div class="gallery-caption">
-                                <h4>Musdes 2025</h4>
-                                <i class="fa-solid fa-expand"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="dokum6.jpeg" alt="Dokumentasi Kerja BUMDes 6" width="400" height="300" loading="lazy" decoding="async">
-                        <div class="gallery-overlay">
-                            <div class="gallery-caption">
-                                <h4>Pengurus BUMDes Manggis Saat Ini</h4>
-                                <i class="fa-solid fa-expand"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="dokum7.jpeg" alt="Dokumentasi Kerja BUMDes 7" width="400" height="300" loading="lazy" decoding="async">
-                        <div class="gallery-overlay">
-                            <div class="gallery-caption">
-                                <h4>Air Terjun Grojogan Yehpoh</h4>
-                                <i class="fa-solid fa-expand"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="dokum8.jpeg" alt="Dokumentasi Kerja BUMDes 8" width="400" height="300" loading="lazy" decoding="async">
-                        <div class="gallery-overlay">
-                            <div class="gallery-caption">
-                                <h4>Program Ketahanan Pangan (3)</h4>
-                                <i class="fa-solid fa-expand"></i>
-                            </div>
-                        </div>
-                    </div>
+
+                    <!-- Tombol Panah Kanan -->
+                    <button class="gallery-arrow gallery-next" id="galleryNext" aria-label="Halaman Selanjutnya">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
                 </div>
+
+                <!-- Container Dots Indicator -->
+                <div class="gallery-dots" id="galleryDots"></div>
             </div>
         </section>
 
@@ -392,7 +616,7 @@
                     </div>
                     <p style="font-size: 0.9rem; line-height: 1.6;">Lembaga usaha milik desa yang berkomitmen membangun kemandirian ekonomi masyarakat Manggis secara inklusif dan berkelanjutan.</p>
                     <div class="footer-social">
-                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.facebook.com/share/1DAnN1XqUu/" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/caturmandalamanggis?stkn=MWxueGl6dWpwemY5cQ==" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://wa.me/6282147740808" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
                     </div>
@@ -487,4 +711,4 @@
     
     <script src="script.js" defer></script>
 </body>
-</html>
+</html>   

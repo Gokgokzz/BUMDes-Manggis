@@ -622,17 +622,159 @@ ul {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 50px;
+    gap: 250px;
     width: 100%;
     position: relative;
     z-index: 3;
+    margin-left: 80px;
 }
 
+/* ==========================================
+   CAROUSEL HERO 3D SLIDESHOW & NAME BADGE
+   ========================================== */
 .hero-image {
-    flex: 1;
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    height: 480px;
     display: flex;
     justify-content: center;
     align-items: center;
+    perspective: 1000px;
+    margin-right: 20px;
+}
+
+.hero-slider-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+}
+
+.hero-slide {
+    position: absolute;
+    width: 280px;
+    height: auto;
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+}
+
+/* Card foto & nama pengurus */
+.hero-img-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    overflow: hidden;
+    background: transparent; /* Diubah agar tidak ada latar belakang border semi-transparan */
+    backdrop-filter: blur(8px);
+    border: none; /* MENGHAPUS BORDER PADA BINGKAI FOTO */
+    padding: 12px;
+    box-shadow: none; /* Menghapus bayangan kotak bingkai agar foto tampak menyatu alami */
+}
+
+.hero-slide img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 14px;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+}
+
+/* Badge Nama di bawah Foto */
+.hero-name-badge {
+    margin-top: 10px;
+    text-align: center;
+    background: rgba(19, 42, 24, 0.85);
+    border: 1px solid rgba(139, 231, 139, 0.3);
+    padding: 8px 14px;
+    border-radius: 30px;
+    width: 100%;
+    backdrop-filter: blur(5px);
+}
+
+.hero-name-badge .name {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
+.hero-name-badge .role {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #8BE78B;
+    margin-top: 2px;
+}
+
+/* FOTO UTAMA (Terdepan, Menonjol, Opacity 100%) */
+.hero-slide.active {
+    transform: translateX(0) translateZ(100px) scale(1.1);
+    opacity: 1;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+/* FOTO SEBELAH KIRI (Transparan & Agak Buram) */
+.hero-slide.prev {
+    transform: translateX(-160px) translateZ(0) rotateY(15deg) scale(0.82);
+    opacity: 0.45;
+    filter: blur(1.5px);
+    z-index: 5;
+    pointer-events: auto;
+}
+
+/* FOTO SEBELAH KANAN (Transparan & Agak Buram) */
+.hero-slide.next {
+    transform: translateX(160px) translateZ(0) rotateY(-15deg) scale(0.82);
+    opacity: 0.45;
+    filter: blur(1.5px);
+    z-index: 5;
+    pointer-events: auto;
+}
+
+/* Tombol Panah Navigasi Hero */
+.hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+.hero-arrow:hover {
+    background: var(--brand);
+    border-color: var(--brand);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.hero-prev { 
+    left: -50px; 
+}
+
+.hero-next { 
+    right: -50px; 
 }
 
 .hero-image img {
@@ -749,9 +891,10 @@ ul {
     gap: 30px;
 }
 
-.about-img-box { 
-    flex: 1; 
-    position: relative; 
+.about-img-box {
+    flex: 1;
+    position: relative;
+    box-shadow: none !important; /* Tambahkan baris ini untuk mematikan shadow lancip */
 }
 
 .about-img-box img { 
@@ -1147,6 +1290,94 @@ ul {
     transform: translateY(20px);
     transition: transform 0.4s ease;
     width: 100%;
+}
+
+.gallery-carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 10px 0;
+}
+
+/* Container utama slide yang bisa bergeser secara mulus */
+.gallery-slider-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    width: 100%;
+}
+
+/* Setiap halaman slide mewakili 1 grup (maksimal 8 foto) */
+.gallery-page {
+    min-width: 100%;
+    flex: 0 0 100%;
+    box-sizing: border-box;
+}
+
+.gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    background-color: var(--brand, #1b4332);
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0.9;
+}
+
+.gallery-arrow:hover {
+    background-color: var(--brand-dark, #081c15);
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.gallery-prev {
+    left: 10px;
+}
+
+.gallery-next {
+    right: 10px;
+}
+
+.gallery-arrow.hidden {
+    display: none !important;
+}
+
+/* Dots Indicator di Bagian Bawah */
+.gallery-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 25px;
+}
+
+.gallery-dots.hidden {
+    display: none !important;
+}
+
+.gallery-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #c2d6c5;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Efek elastis saat melebar */
+}
+
+/* Animasi Melebar untuk Dot Aktif */
+.gallery-dot.active {
+    background-color: var(--brand, #1b4332);
+    width: 30px; /* Melebar secara dinamis */
 }
 
 .gallery-item:hover .gallery-caption { transform: translateY(0); }
@@ -1883,30 +2114,133 @@ footer#kontak { position: relative !important; overflow: visible !important; }
         flex-direction: column;
     }
 
-    /* Hero Section Mobile */
     .hero {
-        padding-top: 140px; 
-        padding-bottom: 80px; 
+        padding-top: 110px; 
+        padding-bottom: 50px; 
         height: auto;
         min-height: 100vh;
         display: flex;
         align-items: center;
     }
 
-    .hero-wrapper { flex-direction: column; text-align: center; gap: 30px; }
-    .hero-image img { max-height: 35vh; }
+    .hero-wrapper {
+        flex-direction: column; /* Teks di atas, Slider Foto Pengurus di bawah */
+        gap: 30px;
+        margin-left: 0; /* Reset margin desktop */
+        padding: 0 15px;
+        width: 100%;
+    }
+
+    /* 2. Hero Content (Teks Utama & Tombol) */
+    .hero-content {
+        text-align: center;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .hero h2 {
+        font-size: 2.1rem; /* Ukuran font judul yang pas di mobile */
+        line-height: 1.25;
+        margin-bottom: 16px;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 24px;
+        padding: 0 10px;
+    }
+
     .hero-buttons {
         display: flex;
         flex-direction: row;      
         justify-content: center;  
-        flex-wrap: nowrap;       
-        gap: 10px;                
+        align-items: center;
+        flex-wrap: wrap; /* Agar tombol otomatis menyesuaikan jika layar sangat kecil */
+        gap: 12px;                
         width: 100%;
-        overflow-x: visible;     
+        padding: 0;
     }
 
-    .hero-buttons .btn { padding: 8px 14px; font-size: 0.8rem; gap: 6px; }
-    .hero h2 { font-size: 2.8rem; }
+    .hero-buttons .btn {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+        width: auto;
+    }
+
+    /* 3. Container Slider Hero Image */
+    .hero-image {
+        width: 100%;
+        max-width: 100%;
+        height: 380px; /* Dipertinggi sedikit agar Badge Nama di bawah foto muat & rapi */
+        margin-right: 0;
+        perspective: 800px;
+        overflow: hidden; /* Mencegah horizontal scrollbar pada layar HP */
+    }
+
+    /* 4. Penyesuaian Responsif 3D Slider Track */
+    .hero-slide {
+        width: 190px; /* Ukuran slide dikecilkan agar proporsional di HP */
+    }
+
+    .hero-slide img {
+        height: 230px; /* Ukuran tinggi foto disesuaikan */
+        border-radius: 12px;
+    }
+
+    /* Active Slide (Terdepan & Fokus Utama) */
+    .hero-slide.active {
+        transform: translateX(0) translateZ(60px) scale(1.05);
+        opacity: 1;
+        z-index: 10;
+    }
+
+    /* Prev Slide (Kiri) - Offset disesuaikan agar tidak melenceng keluar HP */
+    .hero-slide.prev {
+        transform: translateX(-105px) translateZ(0) rotateY(12deg) scale(0.78);
+        opacity: 0.4;
+        filter: blur(1px);
+        z-index: 5;
+    }
+
+    /* Next Slide (Kanan) - Offset disesuaikan agar pas di dalam frame layar */
+    .hero-slide.next {
+        transform: translateX(105px) translateZ(0) rotateY(-12deg) scale(0.78);
+        opacity: 0.4;
+        filter: blur(1px);
+        z-index: 5;
+    }
+
+    /* Badge Nama & Jabatan di Mobile */
+    .hero-name-badge {
+        margin-top: 8px;
+        padding: 6px 10px;
+        border-radius: 20px;
+    }
+
+    .hero-name-badge .name {
+        font-size: 0.75rem;
+    }
+
+    .hero-name-badge .role {
+        font-size: 0.62rem;
+    }
+
+    /* 5. Tombol Panah Navigasi Hero Slider di Mobile */
+    .hero-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 0.85rem;
+        background: rgba(19, 42, 24, 0.6); /* Background lebih pekat agar terbaca jelas */
+    }
+
+    .hero-prev { 
+        left: 5px; /* Pindahkan posisi panah ke dalam area pandang HP */
+    }
+
+    .hero-next { 
+        right: 5px; 
+    }
 
     /* About, Brosur, dsb Mobile */
     .about-wrap { flex-direction: column; text-align: center; }
@@ -2216,4 +2550,9 @@ footer#kontak { position: relative !important; overflow: visible !important; }
     50% {
         transform: translateY(-8px) scale(1.05);
     }
+}
+.about-img-box img {
+    border: 3px double var(--brand);
+    outline: 2px solid var(--leaf);
+    outline-offset: 4px;
 }

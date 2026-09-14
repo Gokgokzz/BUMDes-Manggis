@@ -322,4 +322,168 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    const heroPrevBtn = document.getElementById('heroPrev');
+    const heroNextBtn = document.getElementById('heroNext');
+
+    if (heroSlides.length > 0) {
+        let currentHeroIndex = 0;
+        const totalSlides = heroSlides.length;
+        let heroAutoSlideInterval;
+
+        // Fungsi memperbarui posisi & tampilan transparansi foto
+        function updateHeroCarousel() {
+            heroSlides.forEach((slide, index) => {
+                // Reset class posisi
+                slide.classList.remove('active', 'prev', 'next');
+
+                if (index === currentHeroIndex) {
+                    // Foto utama (terdepan, menonjol, opacity 100%)
+                    slide.classList.add('active');
+                } else if (index === (currentHeroIndex - 1 + totalSlides) % totalSlides) {
+                    // Foto di sebelah kiri (agak transparan/buram)
+                    slide.classList.add('prev');
+                } else {
+                    // Foto di sebelah kanan (agak transparan/buram)
+                    slide.classList.add('next');
+                }
+            });
+        }
+
+        // Navigasi Kanan (Arah berganti ke kanan secara otomatis/manual)
+        function nextHeroSlide() {
+            currentHeroIndex = (currentHeroIndex + 1) % totalSlides;
+            updateHeroCarousel();
+        }
+
+        // Navigasi Kiri (Manual)
+        function prevHeroSlide() {
+            currentHeroIndex = (currentHeroIndex - 1 + totalSlides) % totalSlides;
+            updateHeroCarousel();
+        }
+
+        // Jalankan Rotasi Otomatis setiap 4 Detik
+        function startHeroAutoSlide() {
+            stopHeroAutoSlide();
+            heroAutoSlideInterval = setInterval(nextHeroSlide, 4000);
+        }
+
+        function stopHeroAutoSlide() {
+            if (heroAutoSlideInterval) clearInterval(heroAutoSlideInterval);
+        }
+
+        // Event Listener Tombol Manual
+        if (heroNextBtn) {
+            heroNextBtn.addEventListener('click', () => {
+                nextHeroSlide();
+                startHeroAutoSlide(); // Reset timer saat diklik manual
+            });
+        }
+
+        if (heroPrevBtn) {
+            heroPrevBtn.addEventListener('click', () => {
+                prevHeroSlide();
+                startHeroAutoSlide(); // Reset timer saat diklik manual
+            });
+        }
+
+        // Event Listener Klik Langsung pada Foto Samping
+        heroSlides.forEach((slide, idx) => {
+            slide.addEventListener('click', () => {
+                currentHeroIndex = idx;
+                updateHeroCarousel();
+                startHeroAutoSlide();
+            });
+        });
+
+        // Inisialisasi awal
+        updateHeroCarousel();
+        startHeroAutoSlide();
+    }
+
+    const track = document.getElementById('gallerySliderTrack');
+    const prevBtn = document.getElementById('galleryPrev');
+    const nextBtn = document.getElementById('galleryNext');
+    const dotsContainer = document.getElementById('galleryDots');
+
+    if (track) {
+        let pages = track.querySelectorAll('.gallery-page');
+        let currentPage = 0;
+
+        function initGallerySlider() {
+            pages = track.querySelectorAll('.gallery-page');
+            const totalPages = pages.length;
+
+            if (dotsContainer) dotsContainer.innerHTML = '';
+
+            // Jika lebih dari 1 halaman (lebih dari 8 foto), tampilkan arrow & dots
+            if (totalPages > 1) {
+                if (prevBtn) prevBtn.classList.remove('hidden');
+                if (nextBtn) nextBtn.classList.remove('hidden');
+                if (dotsContainer) dotsContainer.classList.remove('hidden');
+
+                for (let i = 0; i < totalPages; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('gallery-dot');
+                    if (i === 0) dot.classList.add('active');
+                    
+                    dot.addEventListener('click', function() {
+                        goToPage(i);
+                    });
+
+                    if (dotsContainer) dotsContainer.appendChild(dot);
+                }
+            } else {
+                // Jika hanya 1 halaman, sembunyikan arrow & dots
+                if (prevBtn) prevBtn.classList.add('hidden');
+                if (nextBtn) nextBtn.classList.add('hidden');
+                if (dotsContainer) dotsContainer.classList.add('hidden');
+            }
+
+            updateSliderPosition();
+        }
+
+        function goToPage(index) {
+            const totalPages = pages.length;
+            if (index < 0) {
+                currentPage = totalPages - 1;
+            } else if (index >= totalPages) {
+                currentPage = 0;
+            } else {
+                currentPage = index;
+            }
+
+            updateSliderPosition();
+        }
+
+        function updateSliderPosition() {
+            track.style.transform = `translateX(-${currentPage * 100}%)`;
+
+            if (dotsContainer) {
+                const dots = dotsContainer.querySelectorAll('.gallery-dot');
+                dots.forEach((dot, idx) => {
+                    if (idx === currentPage) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function() {
+                goToPage(currentPage - 1);
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function() {
+                goToPage(currentPage + 1);
+            });
+        }
+
+        initGallerySlider();
+    }
+
 }); // Penutup utama document.addEventListener('DOMContentLoaded', ...)
