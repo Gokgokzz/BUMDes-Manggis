@@ -92,6 +92,7 @@ if (isset($_GET['hapus_lamaran'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin | BUMDes Manggis</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="logo website bumdes manggis.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -353,10 +354,10 @@ if (isset($_GET['hapus_lamaran'])) {
                     </a>
                 </li>
                 <li class="<?php echo ($page == 'lamaran_kerja') ? 'active' : ''; ?>">
-                    <a href="admin_dashboard.php?page=lamaran_kerja">
-                        <i class="fa-solid fa-user-briefcase"></i> Lamaran Kerja
-                    </a>
-                </li>
+    <a href="admin_dashboard.php?page=lamaran_kerja">
+        <i class="fa-solid fa-briefcase"></i> Lamaran Kerja
+    </a>
+</li>
             </ul>
         </div>
 
@@ -425,8 +426,8 @@ if (isset($_GET['hapus_lamaran'])) {
                         <h4>Total Pelamar Kerja</h4>
                         <h2><?php echo $d_lamaran['c'] ?? 0; ?></h2>
                     </div>
-                    <div class="stat-icon" style="background: rgba(2, 132, 199, 0.1); color: #0284c7;">
-                        <i class="fa-solid fa-user-briefcase"></i>
+                    <div class="stat-icon" style="background: #e0f2fe;">
+    <i class="fa-solid fa-briefcase" style="color: #0284c7; font-size: 1.3rem;"></i>
                     </div>
                 </div>
             </div>
