@@ -639,20 +639,19 @@ ul {
     align-items: center;
 }
 
-/* Container Wrapper Foto */
+/* 1. Sesuaikan tinggi kontainer agar foto terakomodasi dengan baik */
 .hero-team-photo-wrap {
     width: min(100%, 520px);
-    height: 430px;
+    height: 480px; /* Ditingkatkan dari 430px ke 480px agar proporsional */
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    overflow: visible; /* DIUBAH dari hidden ke visible agar kepala pengurus tidak terpotong saat diperbesar */
+    overflow: visible;
     position: relative;
     z-index: 2;
 }
 
-/* Foto Utama Pengurus */
-/* Foto Utama Pengurus */
+/* 2. Turunkan nilai scale awal agar tidak terlalu over-size */
 .hero-team-photo {
     display: block;
     width: 100%;
@@ -660,18 +659,17 @@ ul {
     object-fit: contain;
     object-position: center bottom;
     
-   
-    transform: scale(1.40); 
+    /* Ubah dari scale(1.40) menjadi skala normal/sedikit diperbesar, misal 1.05 */
+    transform: scale(1.20); 
     transform-origin: bottom center; 
     
     filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.2));
     transition: transform 0.45s ease, filter 0.45s ease;
 }
 
-/* Efek Hover Saat Kursor Diatas Foto */
+/* 3. Berikan efek zoom halus saat di-hover */
 .hero-team-photo-wrap:hover .hero-team-photo {
-    /* Pastikan nilai translateX(20px) tetap sama agar foto tidak melompat saat di-hover */
-    transform: scale(1.42) translateY(-3px);
+    transform: scale(1.25) translateY(-5px); /* Efek perbesaran halus dan responsif */
     filter: drop-shadow(0 24px 32px rgba(35, 25, 25, 0.28));
 }
 
