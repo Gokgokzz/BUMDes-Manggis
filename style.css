@@ -591,7 +591,7 @@ ul {
 }
 
 /* ==========================================
-   HERO SECTION & BANNER MARQUEE
+   HERO SECTION & FOTO PENGURUS
    ========================================== */
 .hero {
     min-height: 100vh;
@@ -622,173 +622,122 @@ ul {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 250px;
+    gap: 60px;
     width: 100%;
     position: relative;
     z-index: 3;
-    margin-left: 80px;
 }
 
-/* ==========================================
-   CAROUSEL HERO 3D SLIDESHOW & NAME BADGE
-   ========================================== */
+/* Container Foto & Border Kartu Nama */
 .hero-image {
     position: relative;
     width: 100%;
-    max-width: 550px;
-    height: 480px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    perspective: 1000px;
-    margin-right: 20px;
-}
-
-.hero-slider-track {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform-style: preserve-3d;
-}
-
-.hero-slide {
-    position: absolute;
-    width: 280px;
-    height: auto;
-    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-    opacity: 0;
-    pointer-events: none;
-    cursor: pointer;
-}
-
-/* Card foto & nama pengurus */
-.hero-img-card {
-    position: relative;
+    max-width: 560px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    border-radius: 20px;
-    overflow: hidden;
-    background: transparent; /* Diubah agar tidak ada latar belakang border semi-transparan */
-    backdrop-filter: blur(8px);
-    border: none; /* MENGHAPUS BORDER PADA BINGKAI FOTO */
-    padding: 12px;
-    box-shadow: none; /* Menghapus bayangan kotak bingkai agar foto tampak menyatu alami */
-}
-
-.hero-slide img {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-    border-radius: 14px;
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
-}
-
-/* Badge Nama di bawah Foto */
-.hero-name-badge {
-    margin-top: 10px;
-    text-align: center;
-    background: rgba(19, 42, 24, 0.85);
-    border: 1px solid rgba(139, 231, 139, 0.3);
-    padding: 8px 14px;
-    border-radius: 30px;
-    width: 100%;
-    backdrop-filter: blur(5px);
-}
-
-.hero-name-badge .name {
-    display: block;
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: 0.5px;
-    line-height: 1.2;
-}
-
-.hero-name-badge .role {
-    display: block;
-    font-size: 0.68rem;
-    font-weight: 600;
-    color: #8BE78B;
-    margin-top: 2px;
-}
-
-/* FOTO UTAMA (Terdepan, Menonjol, Opacity 100%) */
-.hero-slide.active {
-    transform: translateX(0) translateZ(100px) scale(1.1);
-    opacity: 1;
-    z-index: 10;
-    pointer-events: auto;
-}
-
-/* FOTO SEBELAH KIRI (Transparan & Agak Buram) */
-.hero-slide.prev {
-    transform: translateX(-160px) translateZ(0) rotateY(15deg) scale(0.82);
-    opacity: 0.45;
-    filter: blur(1.5px);
-    z-index: 5;
-    pointer-events: auto;
-}
-
-/* FOTO SEBELAH KANAN (Transparan & Agak Buram) */
-.hero-slide.next {
-    transform: translateX(160px) translateZ(0) rotateY(-15deg) scale(0.82);
-    opacity: 0.45;
-    filter: blur(1.5px);
-    z-index: 5;
-    pointer-events: auto;
-}
-
-/* Tombol Panah Navigasi Hero */
-.hero-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    cursor: pointer;
-    z-index: 20;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(4px);
+    align-items: center;
 }
 
-.hero-arrow:hover {
-    background: var(--brand);
-    border-color: var(--brand);
-    transform: translateY(-50%) scale(1.1);
+/* Container Wrapper Foto */
+.hero-team-photo-wrap {
+    width: min(100%, 520px);
+    height: 430px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: visible; /* DIUBAH dari hidden ke visible agar kepala pengurus tidak terpotong saat diperbesar */
+    position: relative;
+    z-index: 2;
 }
 
-.hero-prev { 
-    left: -50px; 
-}
-
-.hero-next { 
-    right: -50px; 
-}
-
-.hero-image img {
-    max-width: 100%;
-    height: auto;
-    max-height: 60vh; 
+/* Foto Utama Pengurus */
+/* Foto Utama Pengurus */
+.hero-team-photo {
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
+    object-position: center bottom;
+    
+   
+    transform: scale(1.40); 
+    transform-origin: bottom center; 
+    
+    filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.2));
+    transition: transform 0.45s ease, filter 0.45s ease;
 }
 
+/* Efek Hover Saat Kursor Diatas Foto */
+.hero-team-photo-wrap:hover .hero-team-photo {
+    /* Pastikan nilai translateX(20px) tetap sama agar foto tidak melompat saat di-hover */
+    transform: scale(1.42) translateY(-3px);
+    filter: drop-shadow(0 24px 32px rgba(35, 25, 25, 0.28));
+}
+
+/* Grid 3 Border untuk Masing-Masing Orang */
+.hero-team-labels {
+    width: min(100%, 520px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: -6px;
+    position: relative;
+    z-index: 4;
+}
+
+/* Style Kartu Pengurus Utama (Desktop) */
+.hero-person-card {
+    min-height: 95px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 14px 24px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 999px !important; /* 999px memastikan bentuk kapsul/lonjong sempurna */
+    box-shadow: 0 10px 25px rgba(30, 70, 41, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+/* Penegasan Border Warna Khusus */
+.hero-person-card.border-kiri,
+.hero-person-card.border-tengah,
+.hero-person-card.border-kanan {
+    border: 2px solid #2E6F40;
+}
+
+.hero-person-card:hover {
+    transform: translateY(-6px);
+    border-color: #1E4629;
+    box-shadow: 0 16px 32px rgba(30, 70, 41, 0.25);
+}
+
+.hero-person-card .role {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--brand);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.hero-person-card .name {
+    display: block;
+    color: var(--text-main);
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* Konten Teks Hero */
 .hero-content {
     flex: 1;
-    max-width: 700px;
+    max-width: 650px;
     animation: fadeInUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
@@ -807,7 +756,7 @@ ul {
 }
 
 .hero p { 
-    font-size: 1.25rem; 
+    font-size: 1.2rem; 
     margin-bottom: 30px; 
     color: rgba(255,255,255,0.9); 
     font-weight: 500; 
@@ -818,17 +767,37 @@ ul {
 }
 
 .hero-buttons { 
-    padding: 8px 5px;    
-    font-size: 0.88rem;
-    font-weight: 500;
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    justify-content: center;
     gap: 15px;                  
-    border-radius: 30px;
-    transition: 0.3s ease;
-    white-space: nowrap;       
-    width: auto;
+    flex-wrap: wrap;
+}
+
+/* Responsif Layar Kecil / Mobile (HP) */
+@media (max-width: 768px) {
+    .hero-wrapper {
+        flex-direction: column-reverse;
+        gap: 40px;
+    }
+    
+    .hero-team-labels {
+        gap: 8px;
+        margin-top: 104px;
+    }
+
+    .hero-person-card {
+        padding: 12px 16px !important; /* Padding kanan-kiri disesuaikan agar teks tidak menabrak lekukan */
+        min-height: 70px;
+        border-radius: 999px !important; /* Paksa tetap lonjong sempurna di mobile */
+    }
+
+    .hero-person-card .role {
+        font-size: 0.65rem;
+    }
+
+    .hero-person-card .name {
+        font-size: 0.72rem;
+    }
 }
 
 .welcome-marquee {
@@ -2168,78 +2137,40 @@ footer#kontak { position: relative !important; overflow: visible !important; }
         width: auto;
     }
 
-    /* 3. Container Slider Hero Image */
+    /* 3. Foto Tim Pengurus di Mobile */
     .hero-image {
         width: 100%;
-        max-width: 100%;
-        height: 380px; /* Dipertinggi sedikit agar Badge Nama di bawah foto muat & rapi */
+        max-width: 520px;
         margin-right: 0;
-        perspective: 800px;
-        overflow: hidden; /* Mencegah horizontal scrollbar pada layar HP */
     }
 
-    /* 4. Penyesuaian Responsif 3D Slider Track */
-    .hero-slide {
-        width: 190px; /* Ukuran slide dikecilkan agar proporsional di HP */
+    .hero-team-photo-wrap {
+        width: 100%;
+        height: 330px;
     }
 
-    .hero-slide img {
-        height: 230px; /* Ukuran tinggi foto disesuaikan */
-        border-radius: 12px;
+    .hero-team-labels {
+        width: 100%;
+        gap: 8px;
+        margin-top: -4px;
     }
 
-    /* Active Slide (Terdepan & Fokus Utama) */
-    .hero-slide.active {
-        transform: translateX(0) translateZ(60px) scale(1.05);
-        opacity: 1;
-        z-index: 10;
+    .hero-person-card {
+        min-height: 88px;
+        padding: 10px 8px;
+        border-radius: 14px;
+        border-width: 1.5px;
     }
 
-    /* Prev Slide (Kiri) - Offset disesuaikan agar tidak melenceng keluar HP */
-    .hero-slide.prev {
-        transform: translateX(-105px) translateZ(0) rotateY(12deg) scale(0.78);
-        opacity: 0.4;
-        filter: blur(1px);
-        z-index: 5;
-    }
-
-    /* Next Slide (Kanan) - Offset disesuaikan agar pas di dalam frame layar */
-    .hero-slide.next {
-        transform: translateX(105px) translateZ(0) rotateY(-12deg) scale(0.78);
-        opacity: 0.4;
-        filter: blur(1px);
-        z-index: 5;
-    }
-
-    /* Badge Nama & Jabatan di Mobile */
-    .hero-name-badge {
-        margin-top: 8px;
-        padding: 6px 10px;
-        border-radius: 20px;
-    }
-
-    .hero-name-badge .name {
-        font-size: 0.75rem;
-    }
-
-    .hero-name-badge .role {
+    .hero-person-card .role {
         font-size: 0.62rem;
+        letter-spacing: 0.7px;
+        line-height: 1.2;
     }
 
-    /* 5. Tombol Panah Navigasi Hero Slider di Mobile */
-    .hero-arrow {
-        width: 36px;
-        height: 36px;
-        font-size: 0.85rem;
-        background: rgba(19, 42, 24, 0.6); /* Background lebih pekat agar terbaca jelas */
-    }
-
-    .hero-prev { 
-        left: 5px; /* Pindahkan posisi panah ke dalam area pandang HP */
-    }
-
-    .hero-next { 
-        right: 5px; 
+    .hero-person-card .name {
+        font-size: 0.68rem;
+        line-height: 1.3;
     }
 
     /* About, Brosur, dsb Mobile */
@@ -2299,6 +2230,27 @@ footer#kontak { position: relative !important; overflow: visible !important; }
 
 /* --- HP SANGAT KECIL (Maksimal 480px) --- */
 @media (max-width: 480px) {
+    .hero-team-photo-wrap {
+        height: 285px;
+    }
+
+    .hero-team-labels {
+        gap: 6px;
+    }
+
+    .hero-person-card {
+        min-height: 82px;
+        padding: 8px 5px;
+    }
+
+    .hero-person-card .role {
+        font-size: 0.55rem;
+    }
+
+    .hero-person-card .name {
+        font-size: 0.61rem;
+    }
+
     .mascot-container {
         width: 70px;     
         top: -63px;
