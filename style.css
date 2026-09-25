@@ -642,7 +642,7 @@ ul {
 /* 1. Sesuaikan tinggi kontainer agar foto terakomodasi dengan baik */
 .hero-team-photo-wrap {
     width: min(100%, 520px);
-    height: 480px; /* Ditingkatkan dari 430px ke 480px agar proporsional */
+    height: 475px; /* Ditingkatkan dari 430px ke 480px agar proporsional */
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -693,7 +693,7 @@ ul {
     align-items: center;
     text-align: center;
     padding: 14px 24px;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--brand);
     border-radius: 999px !important; /* 999px memastikan bentuk kapsul/lonjong sempurna */
     box-shadow: 0 10px 25px rgba(30, 70, 41, 0.15);
     backdrop-filter: blur(10px);
@@ -717,7 +717,7 @@ ul {
 .hero-person-card .role {
     display: block;
     margin-bottom: 4px;
-    color: var(--brand);
+    color: var(--white);
     font-size: 0.7rem;
     font-weight: 800;
     letter-spacing: 1px;
@@ -726,7 +726,7 @@ ul {
 
 .hero-person-card .name {
     display: block;
-    color: var(--text-main);
+    color: var(--white);
     font-size: 0.75rem;
     font-weight: 700;
     line-height: 1.3;
