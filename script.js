@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // B. FALLBACK PENGAMAN: Paksa hilang maksimal dalam 3 detik 
     // (Penting agar web tidak stuck jika ada gambar/iframe peta yang lambat)
-    setTimeout(hideLoader, 25000);
+    setTimeout(hideLoader, 3000);
 
     // =========================================
     // FUNGSI UMUM
@@ -321,4 +321,90 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileSubmenu.classList.toggle('tampil-sub');
         });
     }
+
+    const track = document.getElementById('gallerySliderTrack');
+    const prevBtn = document.getElementById('galleryPrev');
+    const nextBtn = document.getElementById('galleryNext');
+    const dotsContainer = document.getElementById('galleryDots');
+
+    if (track) {
+        let pages = track.querySelectorAll('.gallery-page');
+        let currentPage = 0;
+
+        function initGallerySlider() {
+            pages = track.querySelectorAll('.gallery-page');
+            const totalPages = pages.length;
+
+            if (dotsContainer) dotsContainer.innerHTML = '';
+
+            // Jika lebih dari 1 halaman (lebih dari 8 foto), tampilkan arrow & dots
+            if (totalPages > 1) {
+                if (prevBtn) prevBtn.classList.remove('hidden');
+                if (nextBtn) nextBtn.classList.remove('hidden');
+                if (dotsContainer) dotsContainer.classList.remove('hidden');
+
+                for (let i = 0; i < totalPages; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('gallery-dot');
+                    if (i === 0) dot.classList.add('active');
+                    
+                    dot.addEventListener('click', function() {
+                        goToPage(i);
+                    });
+
+                    if (dotsContainer) dotsContainer.appendChild(dot);
+                }
+            } else {
+                // Jika hanya 1 halaman, sembunyikan arrow & dots
+                if (prevBtn) prevBtn.classList.add('hidden');
+                if (nextBtn) nextBtn.classList.add('hidden');
+                if (dotsContainer) dotsContainer.classList.add('hidden');
+            }
+
+            updateSliderPosition();
+        }
+
+        function goToPage(index) {
+            const totalPages = pages.length;
+            if (index < 0) {
+                currentPage = totalPages - 1;
+            } else if (index >= totalPages) {
+                currentPage = 0;
+            } else {
+                currentPage = index;
+            }
+
+            updateSliderPosition();
+        }
+
+        function updateSliderPosition() {
+            track.style.transform = `translateX(-${currentPage * 100}%)`;
+
+            if (dotsContainer) {
+                const dots = dotsContainer.querySelectorAll('.gallery-dot');
+                dots.forEach((dot, idx) => {
+                    if (idx === currentPage) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function() {
+                goToPage(currentPage - 1);
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function() {
+                goToPage(currentPage + 1);
+            });
+        }
+
+        initGallerySlider();
+    }
+
 }); // Penutup utama document.addEventListener('DOMContentLoaded', ...)

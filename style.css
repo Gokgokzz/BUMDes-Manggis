@@ -628,108 +628,96 @@ ul {
     z-index: 3;
 }
 
-/* Container Foto & Border Kartu Nama */
+/* ==========================================
+   HERO SECTION & FOTO PENGURUS (3 ORANG)
+   ========================================== */
 .hero-image {
     position: relative;
     width: 100%;
-    max-width: 560px;
+    max-width: 580px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-/* 1. Sesuaikan tinggi kontainer agar foto terakomodasi dengan baik */
+/* Pengaturan Layout Grid Foto (3 Kolom Sejajar) */
 .hero-team-photo-wrap {
-    width: min(100%, 520px);
-    height: 475px; /* Ditingkatkan dari 430px ke 480px agar proporsional */
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    overflow: visible;
-    position: relative;
-    z-index: 2;
-}
-
-/* 2. Turunkan nilai scale awal agar tidak terlalu over-size */
-.hero-team-photo {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center bottom;
-    
-    /* Ubah dari scale(1.40) menjadi skala normal/sedikit diperbesar, misal 1.05 */
-    transform: scale(1.20); 
-    transform-origin: bottom center; 
-    
-    filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.2));
-    transition: transform 0.45s ease, filter 0.45s ease;
-}
-
-/* 3. Berikan efek zoom halus saat di-hover */
-.hero-team-photo-wrap:hover .hero-team-photo {
-    transform: scale(1.25) translateY(-5px); /* Efek perbesaran halus dan responsif */
-    filter: drop-shadow(0 24px 32px rgba(35, 25, 25, 0.28));
-}
-
-/* Grid 3 Border untuk Masing-Masing Orang */
-.hero-team-labels {
-    width: min(100%, 520px);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: -6px;
-    position: relative;
-    z-index: 4;
+    gap: 12px;
+    width: 100%;
+    height: 340px; /* Sesuaikan tinggi foto jika diperlukan */
+    margin: 0 auto 0 auto; /* Menghilangkan jarak bawah agar langsung bertemu border */
+    overflow: hidden;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
-/* Style Kartu Pengurus Utama (Desktop) */
+/* Pengaturan Gambar Foto Individual */
+.hero-team-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.3s ease;
+}
+
+.hero-team-photo-wrap:hover .hero-team-photo {
+    transform: scale(1.03);
+}
+
+/* Pengaturan Label Nama di Bawah Foto */
+.hero-team-labels {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    position: relative;
+    z-index: 4;
+    margin-top: -15px; /* Menggeser border sedikit ke atas agar menyatu rapi dengan bagian bawah foto */
+}
+
+/* Style Kartu Pengurus Utama */
 .hero-person-card {
-    min-height: 95px;
+    min-height: 90px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 14px 24px;
+    padding: 10px 8px;
     background: var(--brand);
-    border-radius: 999px !important; /* 999px memastikan bentuk kapsul/lonjong sempurna */
+    border-radius: 999px !important;
     box-shadow: 0 10px 25px rgba(30, 70, 41, 0.15);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-}
-
-/* Penegasan Border Warna Khusus */
-.hero-person-card.border-kiri,
-.hero-person-card.border-tengah,
-.hero-person-card.border-kanan {
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
     border: 2px solid #2E6F40;
 }
 
 .hero-person-card:hover {
-    transform: translateY(-6px);
-    border-color: #1E4629;
+    transform: translateY(-4px);
     box-shadow: 0 16px 32px rgba(30, 70, 41, 0.25);
 }
 
 .hero-person-card .role {
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     color: var(--white);
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 800;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
 }
 
 .hero-person-card .name {
     display: block;
     color: var(--white);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    line-height: 1.3;
+    line-height: 1.2;
 }
 
 /* Konten Teks Hero */
@@ -771,30 +759,44 @@ ul {
     flex-wrap: wrap;
 }
 
-/* Responsif Layar Kecil / Mobile (HP) */
 @media (max-width: 768px) {
-    .hero-wrapper {
-        flex-direction: column-reverse;
-        gap: 40px;
+    .hero-team-photo-wrap {
+        height: 250px;
+        gap: 6px;
     }
-    
+
     .hero-team-labels {
-        gap: 8px;
-        margin-top: 104px;
+        gap: 6px;
     }
 
     .hero-person-card {
-        padding: 12px 16px !important; /* Padding kanan-kiri disesuaikan agar teks tidak menabrak lekukan */
-        min-height: 70px;
-        border-radius: 999px !important; /* Paksa tetap lonjong sempurna di mobile */
+        min-height: auto;
+        padding: 8px 4px !important;
+        border-radius: 50px !important;
     }
 
     .hero-person-card .role {
-        font-size: 0.65rem;
+        font-size: 0.52rem;
+        letter-spacing: 0.3px;
     }
 
     .hero-person-card .name {
-        font-size: 0.72rem;
+        font-size: 0.58rem;
+        line-height: 1.1;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-team-photo-wrap {
+        height: 210px;
+    }
+
+    .hero-person-card .role {
+        font-size: 0.48rem;
+    }
+
+    .hero-person-card .name {
+        font-size: 0.52rem;
     }
 }
 

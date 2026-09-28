@@ -111,35 +111,43 @@
                 <div class="hero-wrapper">
 
                     <!-- BAGIAN FOTO DENGAN 3 BORDER KARTU PENGURUS -->
-                    <div class="hero-image">
-                        <!-- Foto Tunggal Tiga Pengurus -->
-                        <div class="hero-team-photo-wrap">
-                            <img src="foto-kepala-bumdes2.png"
-                                alt="Pengurus BUMDes Manggis: I Wayan Sumadi, Ni Komang Ayu Suari Dewi, dan I Gede Saputra Wisnawa, SE"
-                                class="hero-team-photo" width="433" height="577" fetchpriority="high">
+                <div class="hero-image">
+                    <!-- Pembungkus Foto dengan CSS Grid 3 Kolom -->
+                    <div class="hero-team-photo-wrap">
+                        <!-- Foto 1: Sekretaris (I Wayan Sumadi) -->
+                        <img src="Pak Sumadi.png" alt="Pengurus BUMDes Manggis: I Wayan Sumadi" class="hero-team-photo"
+                            fetchpriority="high">
+
+                        <!-- Foto 2: Bendahara (Ni Komang Ayu Suari Dewi) -->
+                        <img src="Bu Dewi.png" alt="Pengurus BUMDes Manggis: Ni Komang Ayu Suari Dewi" class="hero-team-photo"
+                            fetchpriority="high">
+
+                        <!-- Foto 3: Direktur (I Gede Saputra Wisnawa, SE) -->
+                        <img src="Pak Gede.png" alt="Pengurus BUMDes Manggis: I Gede Saputra Wisnawa, SE" class="hero-team-photo"
+                            fetchpriority="high">
+                    </div>
+
+                    <!-- 3 Border Label untuk Masing-masing Orang -->
+                    <div class="hero-team-labels" aria-label="Susunan pengurus BUMDes Manggis">
+                        <!-- Border 1: Paling Kiri (Sekretaris) -->
+                        <div class="hero-person-card border-kiri">
+                            <span class="role">SEKRETARIS</span>
+                            <span class="name">I WAYAN SUMADI</span>
                         </div>
 
-                        <!-- 3 Border Label untuk Masing-masing Orang -->
-                        <div class="hero-team-labels" aria-label="Susunan pengurus BUMDes Manggis">
-                            <!-- Border 1: Paling Kiri -->
-                            <div class="hero-person-card border-kiri">
-                                <span class="role">SEKRETARIS</span>
-                                <span class="name">I WAYAN SUMADI</span>
-                            </div>
+                        <!-- Border 2: Di Tengah (Bendahara) -->
+                        <div class="hero-person-card border-tengah">
+                            <span class="role">BENDAHARA</span>
+                            <span class="name">NI KOMANG AYU SUARI DEWI</span>
+                        </div>
 
-                            <!-- Border 2: Di Tengah -->
-                            <div class="hero-person-card border-tengah">
-                                <span class="role">BENDAHARA</span>
-                                <span class="name">NI KOMANG AYU SUARI DEWI</span>
-                            </div>
-
-                            <!-- Border 3: Paling Kanan -->
-                            <div class="hero-person-card border-kanan">
-                                <span class="role">DIREKTUR</span>
-                                <span class="name">I GEDE SAPUTRA WISNAWA, SE</span>
-                            </div>
+                        <!-- Border 3: Paling Kanan (Direktur) -->
+                        <div class="hero-person-card border-kanan">
+                            <span class="role">DIREKTUR</span>
+                            <span class="name">I GEDE SAPUTRA WISNAWA, SE</span>
                         </div>
                     </div>
+                </div>
 
                     <!-- TEKS / KONTEN HERO -->
                     <div class="hero-content">
@@ -389,11 +397,11 @@
                                     </div>
                                 </div>
                                 <div class="gallery-item">
-                                    <img src="dokum7.jpeg" alt="Dokumentasi Kerja BUMDes 7" width="400" height="300"
+                                    <img src="Air-Terjun.jpg" alt="Dokumentasi Kerja BUMDes 7" width="400" height="300"
                                         loading="lazy" decoding="async">
                                     <div class="gallery-overlay">
                                         <div class="gallery-caption">
-                                            <h4>Air Terjun Grojogan Yehpoh</h4>
+                                            <h4>Air Terjun</h4>
                                             <i class="fa-solid fa-expand"></i>
                                         </div>
                                     </div>
@@ -474,11 +482,11 @@
                                     </div>
                                 </div>
                                 <div class="gallery-item">
-                                    <img src="dokum7.jpeg" alt="Dokumentasi Kerja BUMDes 7" width="400" height="300"
+                                    <img src="Air-Terjun.jpg" alt="Dokumentasi Kerja BUMDes 7" width="400" height="300"
                                         loading="lazy" decoding="async">
                                     <div class="gallery-overlay">
                                         <div class="gallery-caption">
-                                            <h4>Air Terjun Grojogan Yehpoh</h4>
+                                            <h4>Air Terjun</h4>
                                             <i class="fa-solid fa-expand"></i>
                                         </div>
                                     </div>
@@ -528,7 +536,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="gallery-item">
+                                <div class="gallery-item">  
                                     <img src="dokum4.jpeg" alt="Dokumentasi Kerja BUMDes 4" width="400" height="300"
                                         loading="lazy" decoding="async">
                                     <div class="gallery-overlay">
@@ -559,11 +567,11 @@
                                     </div>
                                 </div>
                                 <div class="gallery-item">
-                                    <img src="dokum7.jpeg" alt="Dokumentasi Kerja BUMDes 7" width="400" height="300"
+                                    <img src="Air-Terjun.jpg" alt="Dokumentasi Kerja BUMDes 7" width="400" height="300"
                                         loading="lazy" decoding="async">
                                     <div class="gallery-overlay">
                                         <div class="gallery-caption">
-                                            <h4>Air Terjun Grojogan Yehpoh</h4>
+                                            <h4>Air Terjun</h4>
                                             <i class="fa-solid fa-expand"></i>
                                         </div>
                                     </div>
@@ -599,26 +607,24 @@
 
                 <div class="section-header">
                     <div class="section-tag">Destinasi Wisata</div>
-                    <h3 class="section-title">Air Terjun Grojogan Yehpoh</h3>
+                    <h3 class="section-title">Air Terjun</h3>
                 </div>
 
                 <div class="wisata-container">
                     <div class="wisata-card">
                         <div class="wisata-img-box">
-                            <a href="https://maps.app.goo.gl/chXx3qwVLZ5uL8Tt5" target="_blank"
-                                rel="noopener noreferrer" class="wisata-img-link">
-                                <img src="dokum7.jpeg" alt="Wisata Desa Manggis" loading="lazy">
+                            <div class="wisata-img-link">
+                                <img src="Air-Terjun.jpg" alt="Wisata Desa Manggis" loading="lazy">
                                 <div class="map-overlay-hint">
-                                    <i class="fa-solid fa-location-dot"></i> Klik gambar untuk buka lokasi di Google
-                                    Maps
+                                    <i class="fa-solid fa-location-dot"></i> Lokasi belum tersedia di Google Maps
                                 </div>
-                            </a>
+                            </div>
                         </div>
 
                         <div class="wisata-info-box">
                             <h4>Informasi & Daya Tarik</h4>
                             <p>
-                                Air Terjun Grojogan Yehpoh adalah salah satu destinasi wisata alam yang menakjubkan di
+                                Air Terjun adalah salah satu destinasi wisata alam yang menakjubkan di
                                 Desa Manggis, Karangasem.
                             </p>
                         </div>
