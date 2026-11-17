@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
     <!-- Navbar Sesuai Permintaan -->
     <nav class="navbar" id="navbar">
         <div class="container nav-content">
-            <a href="index.html" class="logo">
+            <a href="index.php" class="logo">
                 <i class="fa-solid fa-leaf"></i>
                 <div>
                     <h1>BUMDes<br><span>MANGGIS</span></h1>
@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
                 </div>
             </a>
             <div class="nav-links" id="nav-links">
-                <a href="index.html#produk" class="nav-item">Beranda</a>
+                <a href="index.php#produk" class="nav-item">Beranda</a>
                 <a href="tahunan.php" class="nav-item">Produk Tahunan</a>
                 <a href="form_tahunan.php" class="nav-item active">Form</a>
             </div>

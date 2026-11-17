@@ -242,7 +242,7 @@ html {
                 title="Peta Lokasi Kantor BUMDes Catur Mandala Manggis">
             </iframe>
         </div>
-        <a href="index.html" class="back-link">← Kembali ke Halaman Utama</a>
+        <a href="index.php" class="back-link">← Kembali ke Halaman Utama</a>
     </div>
 </div>
 

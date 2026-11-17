@@ -9,7 +9,7 @@ include 'koneksi.php';
 // Logika Hapus Data
 if (isset($_GET['hapus'])) {
     $id = intval($_GET['hapus']);
-    $cek_kepemilikan = mysqli_query($koneksi, "SELECT * FROM produk_tahunan WHERE id = $id AND user_token = '$current_user_token'");
+    $cek_kepemilikan = mysqli_query($conn, "SELECT * FROM produk_tahunan WHERE id = $id AND user_token = '$current_user_token'");
     
     if (mysqli_num_rows($cek_kepemilikan) > 0) {
         $row_foto = mysqli_fetch_assoc($cek_kepemilikan);
@@ -19,7 +19,7 @@ if (isset($_GET['hapus'])) {
         }
         
         $query_hapus = "DELETE FROM produk_tahunan WHERE id = $id AND user_token = '$current_user_token'";
-        if (mysqli_query($koneksi, $query_hapus)) {
+        if (mysqli_query($conn, $query_hapus)) {
             echo "<script>alert('Data produk tahunan berhasil dihapus!'); window.location.href='tahunan.php';</script>";
         } else {
             echo "<script>alert('Gagal menghapus data!'); window.location.href='tahunan.php';</script>";
@@ -46,7 +46,7 @@ if (isset($_GET['hapus'])) {
     <!-- Navbar Sesuai Permintaan -->
     <nav class="navbar" id="navbar">
         <div class="container nav-content">
-            <a href="index.html" class="logo">
+            <a href="index.php" class="logo">
                 <i class="fa-solid fa-leaf"></i>
                 <div>
                     <h1>BUMDes<br><span>MANGGIS</span></h1>
@@ -54,7 +54,7 @@ if (isset($_GET['hapus'])) {
                 </div>
             </a>
             <div class="nav-links" id="nav-links">
-                <a href="index.html#produk" class="nav-item">Beranda</a>
+                <a href="index.php#produk" class="nav-item">Beranda</a>
                 <a href="tahunan.php" class="nav-item active">Produk Tahunan</a>
                 <a href="form_tahunan.php" class="nav-item">Form</a>
             </div>
@@ -75,7 +75,7 @@ if (isset($_GET['hapus'])) {
             <div class="products-grid">
     <?php
     $query_tampil = "SELECT * FROM produk_tahunan ORDER BY id DESC";
-    $result = mysqli_query($koneksi, $query_tampil);
+    $result = mysqli_query($conn, $query_tampil);
 
     if(mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {

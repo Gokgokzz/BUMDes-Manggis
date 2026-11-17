@@ -665,13 +665,16 @@ ul {
     transition: transform 0.3s ease;
 }
 
-/* Mengatur posisi foto di tengah agar bergeser ke bawah */
+/* Mengatur ukuran, posisi vertikal, dan menggesernya ke kanan */
 .hero-team-photo.photo-tengah {
-    transform: scale(1) translateY(30px); 
+    object-fit: cover;
+    transform: scale(2.8) translateY(-22px) translateX(15px); /* Tambahkan translateX(15px) untuk geser ke kanan */
+    object-position: center 25%;         
 }
 
+/* Mempertahankan posisi saat kursor diarahkan (hover) */
 .hero-team-photo-wrap:hover .hero-team-photo.photo-tengah {
-    transform: scale(1.03) translateY(30px);
+    transform: scale(2.9) translateY(-22px) translateX(15px);
 }
 
 .hero-team-photo-wrap:hover .hero-team-photo {
@@ -2502,6 +2505,45 @@ footer#kontak { position: relative !important; overflow: visible !important; }
     height: 50px;
     margin-top: 2px;
     transform: rotate(-10deg);
+}
+
+.admin-img-btn {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(30, 70, 41, 0.9);
+    color: #8BE78B;
+    border: 1px solid #8BE78B;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    z-index: 20;
+    font-weight: 600;
+}
+body.admin-editing-mode .admin-img-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+body.admin-editing-mode [data-kunci] {
+    outline: 2px dashed #8BE78B;
+    padding: 4px;
+    border-radius: 6px;
+}
+body.admin-editing-mode [data-kunci]:hover {
+    background: rgba(139, 231, 139, 0.15);
+    cursor: text;
+}
+/* Modal Admin */
+.cms-modal {
+    display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7); align-items: center; justify-content: center;
+}
+.cms-modal.open { display: flex; }
+.cms-modal-box {
+    background: #fff; padding: 30px; border-radius: 16px; max-width: 450px; width: 90%; position: relative;
 }
 
 /* Animasi membal (bounce) untuk menarik perhatian */
